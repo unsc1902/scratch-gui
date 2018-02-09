@@ -20,7 +20,7 @@
     user-select: none;
     outline: none;
     background: rgba(255, 255, 255, 0.5);
-    color: $motion-tertiary;
+    color: $menu-item;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
