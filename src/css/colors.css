@@ -2,7 +2,10 @@ $ui-pane-border: #D9D9D9;
 $ui-pane-gray: #F9F9F9;
 $ui-background-blue: #22283c;
 
-$text-primary: #ffc501;
+$ui-warpper: #F9F9F9;
+
+$menu-item: #ffc501;
+$text-primary: #575e75;
 
 $motion-primary: #4C97FF;
 $motion-tertiary: #3373CC;

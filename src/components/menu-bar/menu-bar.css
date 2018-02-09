@@ -64,7 +64,7 @@
     line-height: $menu-bar-height;
     cursor: pointer;
     text-decoration: none;
-    color: $motion-tertiary;
+    color: $menu-item;
     user-select: none;
 }
 
@@ -81,7 +81,7 @@
     cursor: pointer;
     font-size: .75rem;
     font-weight: bold;
-    color: $motion-primary;
+    color: $menu-item;
 }
 
 .feedback-button-icon {
