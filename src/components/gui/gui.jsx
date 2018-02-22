@@ -107,21 +107,6 @@ const GUIComponent = props => {
                                         vm={vm}
                                     />
                                 </Box>
-                                <Box className={styles.extensionButtonContainer}>
-                                    <button
-                                        className={classNames(styles.extensionButton, {
-                                            [styles.hidden]: !enableExtensions
-                                        })}
-                                        title={intl.formatMessage(messages.addExtension)}
-                                        onClick={onExtensionButtonClick}
-                                    >
-                                        <img
-                                            className={styles.extensionButtonIcon}
-                                            draggable={false}
-                                            src={addExtensionIcon}
-                                        />
-                                    </button>
-                                </Box>
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 {tabIndex === 1 ? <CostumeTab vm={vm} /> : null}

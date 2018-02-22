@@ -44,7 +44,7 @@ class SaveButton extends React.Component {
                 onClick={this.handleClick}
                 {...props}
             >
-                Save
+                保存
             </ButtonComponent>
 
         );
