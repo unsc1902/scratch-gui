@@ -36,7 +36,7 @@ const StageSelector = props => {
             {...componentProps}
         >
             <div className={styles.header}>
-                <div className={styles.headerTitle}>Stage</div>
+                <div className={styles.headerTitle}>舞台</div>
             </div>
             {url ? (
                 <CostumeCanvas

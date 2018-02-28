@@ -4,7 +4,7 @@ const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 const motion = function (isStage, targetId) {
     return `
-    <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
+    <category name="运动" colour="#4C97FF" secondaryColour="#3373CC">
         ${isStage ? `
         <label text="Stage selected: no motion blocks"></label>
         ` : `
@@ -134,7 +134,7 @@ const motion = function (isStage, targetId) {
 
 const looks = function (isStage, targetId) {
     return `
-    <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
+    <category name="外观" colour="#9966FF" secondaryColour="#774DCB">
         ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
@@ -262,7 +262,7 @@ const looks = function (isStage, targetId) {
 
 const sound = function () {
     return `
-    <category name="Sound" colour="#D65CD6" secondaryColour="#BD42BD">
+    <category name="声音" colour="#D65CD6" secondaryColour="#BD42BD">
         <block type="sound_play">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu"/>
@@ -313,7 +313,7 @@ const sound = function () {
 
 const events = function () {
     return `
-    <category name="Events" colour="#FFD500" secondaryColour="#CC9900">
+    <category name="事件" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
         <block type="event_whenkeypressed">
         </block>
@@ -348,7 +348,7 @@ const events = function () {
 
 const control = function (isStage) {
     return `
-    <category name="Control" colour="#FFAB19" secondaryColour="#CF8B17">
+    <category name="控制" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
             <value name="DURATION">
                 <shadow type="math_positive_number">
@@ -395,7 +395,7 @@ const control = function (isStage) {
 
 const sensing = function (isStage) {
     return `
-    <category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
+    <category name="侦测" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
@@ -461,7 +461,7 @@ const sensing = function (isStage) {
 
 const operators = function () {
     return `
-    <category name="Operators" colour="#40BF4A" secondaryColour="#389438">
+    <category name="运算" colour="#40BF4A" secondaryColour="#389438">
         <block type="operator_add">
             <value name="NUM1">
                 <shadow type="math_number">
@@ -643,14 +643,14 @@ const operators = function () {
 
 const variables = function () {
     return `
-    <category name="Variables" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
+    <category name="数据" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
     </category>
     `;
 };
 
 const myBlocks = function () {
     return `
-    <category name="My Blocks" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
+    <category name="我的积木" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
     </category>
     `;
 };
