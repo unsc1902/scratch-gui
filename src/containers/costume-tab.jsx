@@ -39,7 +39,7 @@ const messages = defineMessages({
         id: 'gui.costumeTab.addBlankBackdrop'
     },
     addBlankCostumeMsg: {
-        defaultMessage: 'Add Blank Costume',
+        defaultMessage: '新建造型',
         description: 'Button to add a blank costume in the editor tab',
         id: 'gui.costumeTab.addBlankCostume'
     }
