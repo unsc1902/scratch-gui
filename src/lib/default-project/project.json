@@ -9,7 +9,7 @@
             "format": ""
         }],
     "costumes": [{
-            "costumeName": "backdrop1",
+            "costumeName": "codingmarch",
             "baseLayerID": 2,
             "baseLayerMD5": "739b5e2a2435f6e1ec2993791b423146.png",
             "bitmapResolution": 1,
@@ -22,12 +22,12 @@
     "tempoBPM": 60,
     "videoAlpha": 0.5,
     "variables": [{
-        "name": "my variable",
+        "name": "我的变量",
         "isPersistent": false,
         "value": 0
     }],
     "children": [{
-            "objName": "Sprite1",
+            "objName": "码趣君",
             "sounds": [{
                     "soundName": "Meow",
                     "soundID": 0,
@@ -37,7 +37,7 @@
                     "format": ""
                 }],
             "costumes": [{
-                    "costumeName": "costume1",
+                    "costumeName": "码趣君1",
                     "baseLayerID": 0,
                     "baseLayerMD5": "09dc888b0b7df19f70d81588ae73420e.svg",
                     "bitmapResolution": 1,
@@ -45,7 +45,7 @@
                     "rotationCenterY": 55
                 },
                 {
-                    "costumeName": "costume2",
+                    "costumeName": "码趣君2",
                     "baseLayerID": 1,
                     "baseLayerMD5": "3696356a03a8d938318876a593572843.svg",
                     "bitmapResolution": 1,
