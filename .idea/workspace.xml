@@ -2,15 +2,80 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a174b6ed-8735-487d-9cc6-4c233cfaa8f9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/action-menu/action-menu.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/action-menu/action-menu.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/action-menu/icon--camera.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/action-menu/icon--file-upload.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/action-menu/icon--paint.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/action-menu/icon--surprise.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/close-button/icon--back.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/crash-message/crash-message.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/crash-message/crash-message.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/crash-message/reload.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/import-modal/import-modal.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/import-modal/import-modal.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/loader/bottom-block.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/loader/loader.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/loader/loader.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/loader/middle-block.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/loader/top-block.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/containers/import-modal.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/reducers/block-drag.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/reducers/editor-tab.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/reducers/hovered-target.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/asset-button/asset-button.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/asset-button/asset-button.jsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/lib/default-project/5c81a336fab8be57adc039a8a2b33ca9.png" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/sprite-selector/icon--sprite.svg" afterPath="$PROJECT_DIR$/src/components/action-menu/icon--sprite.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/stage-selector/icon--backdrop.svg" afterPath="$PROJECT_DIR$/src/components/action-menu/icon--backdrop.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/library/library.jsx" afterPath="$PROJECT_DIR$/src/components/library/library.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.ejs" afterPath="$PROJECT_DIR$/src/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/asset-panel/selector.css" afterPath="$PROJECT_DIR$/src/components/asset-panel/selector.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/asset-panel/selector.jsx" afterPath="$PROJECT_DIR$/src/components/asset-panel/selector.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/close-button/close-button.css" afterPath="$PROJECT_DIR$/src/components/close-button/close-button.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/close-button/close-button.jsx" afterPath="$PROJECT_DIR$/src/components/close-button/close-button.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/green-flag/green-flag.css" afterPath="$PROJECT_DIR$/src/components/green-flag/green-flag.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/gui/gui.css" afterPath="$PROJECT_DIR$/src/components/gui/gui.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/gui/gui.jsx" afterPath="$PROJECT_DIR$/src/components/gui/gui.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/monitor/monitor.jsx" afterPath="$PROJECT_DIR$/src/components/monitor/monitor.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/preview-modal/preview-modal.css" afterPath="$PROJECT_DIR$/src/components/preview-modal/preview-modal.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/preview-modal/preview-modal.jsx" afterPath="$PROJECT_DIR$/src/components/preview-modal/preview-modal.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/sprite-selector-item/sprite-selector-item.jsx" afterPath="$PROJECT_DIR$/src/components/sprite-selector-item/sprite-selector-item.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/sprite-selector/sprite-selector.css" afterPath="$PROJECT_DIR$/src/components/sprite-selector/sprite-selector.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/sprite-selector/sprite-selector.jsx" afterPath="$PROJECT_DIR$/src/components/sprite-selector/sprite-selector.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/stage-selector/stage-selector.jsx" afterPath="$PROJECT_DIR$/src/components/stage-selector/stage-selector.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/target-pane/target-pane.jsx" afterPath="$PROJECT_DIR$/src/components/target-pane/target-pane.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/blocks.jsx" afterPath="$PROJECT_DIR$/src/containers/blocks.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/costume-tab.jsx" afterPath="$PROJECT_DIR$/src/containers/costume-tab.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/error-boundary.jsx" afterPath="$PROJECT_DIR$/src/containers/error-boundary.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/extension-library.jsx" afterPath="$PROJECT_DIR$/src/containers/extension-library.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/gui.jsx" afterPath="$PROJECT_DIR$/src/containers/gui.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/preview-modal.jsx" afterPath="$PROJECT_DIR$/src/containers/preview-modal.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/sound-editor.jsx" afterPath="$PROJECT_DIR$/src/containers/sound-editor.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/sound-library.jsx" afterPath="$PROJECT_DIR$/src/containers/sound-library.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/sound-tab.jsx" afterPath="$PROJECT_DIR$/src/containers/sound-tab.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/sprite-library.jsx" afterPath="$PROJECT_DIR$/src/containers/sprite-library.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/sprite-selector-item.jsx" afterPath="$PROJECT_DIR$/src/containers/sprite-selector-item.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/stage-selector.jsx" afterPath="$PROJECT_DIR$/src/containers/stage-selector.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/stage.jsx" afterPath="$PROJECT_DIR$/src/containers/stage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/target-pane.jsx" afterPath="$PROJECT_DIR$/src/containers/target-pane.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/css/colors.css" afterPath="$PROJECT_DIR$/src/css/colors.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/blocks.js" afterPath="$PROJECT_DIR$/src/lib/blocks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/default-project/index.js" afterPath="$PROJECT_DIR$/src/lib/default-project/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/default-project/project.json" afterPath="$PROJECT_DIR$/src/lib/default-project/project.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/libraries/backdrops.json" afterPath="$PROJECT_DIR$/src/lib/libraries/backdrops.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/libraries/costumes.json" afterPath="$PROJECT_DIR$/src/lib/libraries/costumes.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/libraries/sounds.json" afterPath="$PROJECT_DIR$/src/lib/libraries/sounds.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/libraries/sprites.json" afterPath="$PROJECT_DIR$/src/lib/libraries/sprites.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/storage.js" afterPath="$PROJECT_DIR$/src/lib/storage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/opcode-labels.js" afterPath="$PROJECT_DIR$/src/lib/opcode-labels.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/project-loader-hoc.jsx" afterPath="$PROJECT_DIR$/src/lib/project-loader-hoc.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/vm-listener-hoc.jsx" afterPath="$PROJECT_DIR$/src/lib/vm-listener-hoc.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/gui.js" afterPath="$PROJECT_DIR$/src/reducers/gui.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/modals.js" afterPath="$PROJECT_DIR$/src/reducers/modals.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/helpers/selenium-helper.js" afterPath="$PROJECT_DIR$/test/helpers/selenium-helper.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/integration/costumes.test.js" afterPath="$PROJECT_DIR$/test/integration/costumes.test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/integration/project-loading.test.js" afterPath="$PROJECT_DIR$/test/integration/project-loading.test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/integration/sounds.test.js" afterPath="$PROJECT_DIR$/test/integration/sounds.test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/components/__snapshots__/sprite-selector-item.test.jsx.snap" afterPath="$PROJECT_DIR$/test/unit/components/__snapshots__/sprite-selector-item.test.jsx.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/containers/sprite-selector-item.test.jsx" afterPath="$PROJECT_DIR$/test/unit/containers/sprite-selector-item.test.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.js" afterPath="$PROJECT_DIR$/webpack.config.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,158 +88,108 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.47902316">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="library.jsx" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/library/library.jsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="409">
-                  <caret line="65" column="67" lean-forward="false" selection-start-line="65" selection-start-column="67" selection-end-line="65" selection-end-column="67" />
-                  <folding>
-                    <element signature="e#0#37#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="sound-library.jsx" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/containers/sound-library.jsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1155">
-                  <caret line="70" column="60" lean-forward="false" selection-start-line="70" selection-start-column="60" selection-end-line="70" selection-end-column="60" />
-                  <folding>
-                    <element signature="e#0#37#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="project.json" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/lib/default-project/project.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="504">
-                  <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="costumes.json" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/lib/libraries/costumes.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="63">
-                  <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="storage.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/lib/storage.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="126">
-                  <caret line="8" column="41" lean-forward="false" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="costumes.json" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/lib/libraries/costumes.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="294">
-                  <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="sprite-library.jsx" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/containers/sprite-library.jsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="598">
-                  <caret line="62" column="80" lean-forward="false" selection-start-line="62" selection-start-column="80" selection-end-line="62" selection-end-column="80" />
-                  <folding>
-                    <element signature="e#0#37#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="menu-bar.jsx" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="619">
-                  <caret line="68" column="27" lean-forward="false" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="modals.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/reducers/modals.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="317">
-                  <caret line="65" column="6" lean-forward="false" selection-start-line="65" selection-start-column="6" selection-end-line="65" selection-end-column="6" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="feedback-form.jsx" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/components/feedback-form/feedback-form.jsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="241">
-                  <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
-                  <folding>
-                    <element signature="e#0#36#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="sprites.json" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/lib/libraries/sprites.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="8011">
-                  <caret line="594" column="42" lean-forward="false" selection-start-line="594" selection-start-column="42" selection-end-line="594" selection-end-column="42" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="backdrops.json" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/lib/libraries/backdrops.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="294">
-                  <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="sounds.json" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/lib/libraries/sounds.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="vertical.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/scratch-blocks/dist/vertical.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="538">
+              <caret line="1456" column="167" lean-forward="false" selection-start-line="1456" selection-start-column="167" selection-end-line="1456" selection-end-column="167" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sprites.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/libraries/sprites.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="435" column="21" lean-forward="false" selection-start-line="435" selection-start-column="21" selection-end-line="435" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gui.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/gui/gui.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2037">
+              <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="costume-tab.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/costume-tab.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sound-library.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/sound-library.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="35" column="32" lean-forward="false" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="project.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/default-project/project.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/default-project/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#128#203#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="costumes.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/libraries/costumes.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="storage.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/storage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="8" column="41" lean-forward="false" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ui-background-blue</find>
       <find>addExtensionIcon</find>
       <find>Scratch 3.0</find>
       <find>Scratch 3.0 Gui</find>
@@ -199,12 +214,19 @@
       <find>scratch.mit.edu</find>
       <find>100</find>
       <find>128</find>
+      <find>Backdrop L</find>
+      <find>Sound L</find>
+      <find>mouse-pointer</find>
+      <find>mouse</find>
+      <find>random</find>
+      <find>random1</find>
     </findStrings>
     <replaceStrings>
       <replace>codingScratch</replace>
       <replace>月</replace>
       <replace>128</replace>
       <replace>55</replace>
+      <replace>鼠标指针</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -214,7 +236,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/lib/default-project/index.js" />
         <option value="$PROJECT_DIR$/src/components/menu-bar/menu-bar.css" />
         <option value="$PROJECT_DIR$/src/components/language-selector/language-selector.css" />
         <option value="$PROJECT_DIR$/src/components/gui/gui.css" />
@@ -239,16 +260,13 @@
         <option value="$PROJECT_DIR$/src/containers/language-selector.jsx" />
         <option value="$PROJECT_DIR$/src/components/load-button/load-button.jsx" />
         <option value="$PROJECT_DIR$/src/containers/save-button.jsx" />
-        <option value="$PROJECT_DIR$/src/components/gui/gui.jsx" />
         <option value="$PROJECT_DIR$/src/components/sprite-info/sprite-info.jsx" />
         <option value="$PROJECT_DIR$/src/components/stage-selector/stage-selector.jsx" />
         <option value="$PROJECT_DIR$/src/lib/make-toolbox-xml.js" />
-        <option value="$PROJECT_DIR$/src/containers/costume-tab.jsx" />
         <option value="$PROJECT_DIR$/node_modules/scratch-l10n/gui/zh.json" />
         <option value="$PROJECT_DIR$/node_modules/scratch-l10n/paint/zh.json" />
         <option value="$PROJECT_DIR$/node_modules/scratch-l10n/locales/gui-msgs.js" />
         <option value="$PROJECT_DIR$/node_modules/scratch-l10n/locales/paint-msgs.js" />
-        <option value="$PROJECT_DIR$/node_modules/scratch-blocks/dist/vertical.js" />
         <option value="$PROJECT_DIR$/src/containers/sprite-library.jsx" />
         <option value="$PROJECT_DIR$/src/components/library/library.jsx" />
         <option value="$PROJECT_DIR$/src/index.ejs" />
@@ -256,8 +274,12 @@
         <option value="$PROJECT_DIR$/src/lib/libraries/sounds.json" />
         <option value="$PROJECT_DIR$/src/lib/storage.js" />
         <option value="$PROJECT_DIR$/src/lib/libraries/backdrops.json" />
-        <option value="$PROJECT_DIR$/src/lib/default-project/project.json" />
         <option value="$PROJECT_DIR$/src/lib/libraries/sprites.json" />
+        <option value="$PROJECT_DIR$/src/lib/default-project/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/costume-tab.jsx" />
+        <option value="$PROJECT_DIR$/src/components/gui/gui.jsx" />
+        <option value="$PROJECT_DIR$/src/lib/default-project/project.json" />
+        <option value="$PROJECT_DIR$/node_modules/scratch-blocks/dist/vertical.js" />
       </list>
     </option>
   </component>
@@ -302,6 +324,44 @@
             <path>
               <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
               <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="scratch-blocks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="scratch-blocks" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="scratch-l10n" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="scratch-l10n" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="scratch-l10n" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
@@ -444,18 +504,19 @@
       <workItem from="1519271798222" duration="7021000" />
       <workItem from="1519350199990" duration="3341000" />
       <workItem from="1519695773713" duration="11000000" />
-      <workItem from="1519782545171" duration="17470000" />
+      <workItem from="1519782545171" duration="24358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68297000" />
+    <option name="totallyTimeSpent" value="75185000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="0" width="1870" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Key Promoter X" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1459893" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1459893" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -486,20 +547,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/scratch-l10n/scripts/build-i18n-src.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="44" column="40" lean-forward="false" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/scratch-l10n/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/language-selector/language-selector.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -640,14 +687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8001">
           <caret line="400" column="15" lean-forward="false" selection-start-line="400" selection-start-column="15" selection-end-line="400" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/gui/gui.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="100" column="41" lean-forward="false" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -814,14 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/costume-tab.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/scratch-l10n/paint/zh.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -888,14 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/scratch-blocks/dist/vertical.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23956">
-          <caret line="1366" column="94" lean-forward="true" selection-start-line="1366" selection-start-column="94" selection-end-line="1366" selection-end-column="94" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/scratch-l10n/gui/zh.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="948">
@@ -945,7 +968,7 @@
         <state relative-caret-position="409">
           <caret line="65" column="67" lean-forward="false" selection-start-line="65" selection-start-column="67" selection-end-line="65" selection-end-column="67" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -968,35 +991,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/libraries/costumes.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        <state relative-caret-position="63">
+          <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/default-project/project.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/libraries/sprites.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8011">
-          <caret line="594" column="42" lean-forward="false" selection-start-line="594" selection-start-column="42" selection-end-line="594" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/sound-library.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="70" column="60" lean-forward="false" selection-start-line="70" selection-start-column="60" selection-end-line="70" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1020,8 +1017,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/modals.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="65" column="6" lean-forward="false" selection-start-line="65" selection-start-column="6" selection-end-line="65" selection-end-column="6" />
+        <state relative-caret-position="359">
+          <caret line="67" column="6" lean-forward="false" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1030,6 +1027,77 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/sound-library.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="35" column="32" lean-forward="false" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/default-project/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#128#203#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/libraries/sprites.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="435" column="21" lean-forward="false" selection-start-line="435" selection-start-column="21" selection-end-line="435" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/costume-tab.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/default-project/project.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/scratch-l10n/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/scratch-blocks/dist/vertical.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="1456" column="167" lean-forward="false" selection-start-line="1456" selection-start-column="167" selection-end-line="1456" selection-end-column="167" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/gui/gui.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2037">
+          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
