@@ -27,6 +27,7 @@ import backdropLibraryContent from '../lib/libraries/backdrops.json';
 
 const messages = defineMessages({
     addLibraryBackdropMsg: {
+
         defaultMessage: '背景库',
         description: 'Button to add a backdrop in the editor tab',
         id: 'gui.costumeTab.addBackdropFromLibrary'
