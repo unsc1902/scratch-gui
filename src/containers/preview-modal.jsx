@@ -30,7 +30,7 @@ class PreviewModal extends React.Component {
         this.props.onTryIt();
     }
     handleCancel () {
-        window.location.replace('https://scratch.mit.edu');
+        window.location.replace('http://www.codingmarch.com');
     }
     handleViewProject () {
         this.props.onViewProject();
