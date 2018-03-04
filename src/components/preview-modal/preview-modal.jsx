@@ -92,7 +92,7 @@ const PreviewModal = ({intl, ...props}) => (
                         previewFaqLink: (
                             <a
                                 className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
+                                href="//www.codingmarch.com"
                             >
                                 <FormattedMessage
                                     defaultMessage="Preview FAQ"

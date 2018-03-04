@@ -533,9 +533,9 @@
             "objName": "任务完成",
             "sounds": [
                 {
-                    "soundName": "pop",
+                    "soundName": "胜利",
                     "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "md5": "win.wav",
                     "sampleCount": 258,
                     "rate": 11025,
                     "format": ""

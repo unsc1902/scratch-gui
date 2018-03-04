@@ -48,7 +48,7 @@ const MenuBar = props => (
                 />
                 <span className={styles.feedbackText}>
                     <FormattedMessage
-                        defaultMessage="Give Feedback"
+                        defaultMessage="联系我们"
                         description="Label for feedback form modal button"
                         id="gui.menuBar.giveFeedback"
                     />
@@ -66,7 +66,8 @@ const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
     onGiveFeedback: () => {
-        dispatch(openFeedbackForm());
+        // dispatch(openFeedbackForm());
+        window.location.replace('http://www.codingmarch.com');
     }
 });
 
