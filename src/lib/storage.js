@@ -1,6 +1,6 @@
 import ScratchStorage from 'scratch-storage';
 
-import defaultProjectAssets from './default-project';
+import defaultProjectAssets from './scratchClassOne';
 
 const PROJECT_SERVER = 'https://cdn.projects.scratch.mit.edu';
 const ASSET_SERVER = 'https://cdn.assets.scratch.mit.edu';
