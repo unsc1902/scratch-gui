@@ -20,17 +20,5 @@
             360,
             1
         ]
-    },
-    {
-        "name": "场地",
-        "md5": "background1.png",
-        "type": "backdrop",
-        "tags": [],
-        "info": [
-            480,
-            360,
-            1
-        ]
-
     }
 ]
