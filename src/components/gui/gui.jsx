@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
-import MediaQuery from 'react-responsive';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 import Renderer from 'scratch-render';
@@ -12,19 +11,22 @@ import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
-import StageHeader from '../../containers/stage-header.jsx';
-import Stage from '../../containers/stage.jsx';
+import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
-import FeedbackForm from '../feedback-form/feedback-form.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+
 import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
+import TipsLibrary from '../../containers/tips-library.jsx';
+import Cards from '../../containers/cards.jsx';
 
-import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
+import codeIcon from './icon--code.svg';
+import costumesIcon from './icon--costumes.svg';
+import soundsIcon from './icon--sounds.svg';
 
 const messages = defineMessages({
     addExtension: {
@@ -34,30 +36,35 @@ const messages = defineMessages({
     }
 });
 
+// Cache this value to only retreive it once the first time.
+// Assume that it doesn't change for a session.
+let isRendererSupported = null;
+
 const GUIComponent = props => {
     const {
         activeTabIndex,
         basePath,
         blocksTabVisible,
+        cardsVisible,
         children,
         costumesTabVisible,
-        feedbackFormVisible,
         importInfoVisible,
         intl,
+        isPlayerOnly,
         loading,
         onExtensionButtonClick,
+        onActivateCostumesTab,
+        onActivateSoundsTab,
         onActivateTab,
         previewInfoVisible,
+        targetIsStage,
         soundsTabVisible,
+        tipsLibraryVisible,
         vm,
         ...componentProps
     } = props;
     if (children) {
-        return (
-            <Box {...componentProps}>
-                {children}
-            </Box>
-        );
+        return <Box {...componentProps}>{children}</Box>;
     }
 
     const tabClassNames = {
@@ -69,28 +76,38 @@ const GUIComponent = props => {
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
-    const isRendererSupported = Renderer.isSupported();
+    if (isRendererSupported === null) {
+        isRendererSupported = Renderer.isSupported();
+    }
 
-    return (
+    return isPlayerOnly ? (
+        <StageWrapper
+            isRendererSupported={isRendererSupported}
+            vm={vm}
+        />
+    ) : (
         <Box
             className={styles.pageWrapper}
             {...componentProps}
         >
-            {previewInfoVisible ? (
+            {/* {previewInfoVisible ? (
                 <PreviewModal />
-            ) : null}
+            ) : null} */}
             {loading ? (
                 <Loader />
             ) : null}
             {importInfoVisible ? (
                 <ImportModal />
             ) : null}
-            {feedbackFormVisible ? (
-                <FeedbackForm />
-            ) : null}
             {isRendererSupported ? null : (
                 <WebGlModal />
             )}
+            {tipsLibraryVisible ? (
+                <TipsLibrary />
+            ) : null}
+            {cardsVisible ? (
+                <Cards />
+            ) : null}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>
@@ -103,10 +120,57 @@ const GUIComponent = props => {
                             selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                             onSelect={onActivateTab}
                         >
-                            <TabList className={tabClassNames.tabList}>
-                                <Tab className={tabClassNames.tab}>程序</Tab>
-                                <Tab className={tabClassNames.tab}>造型</Tab>
-                                <Tab className={tabClassNames.tab}>声音</Tab>
+                            <TabList
+                                className={tabClassNames.tabList}
+                                style={{width: '500px'}}
+                            >
+                                <Tab className={tabClassNames.tab}>
+                                    <img
+                                        draggable={false}
+                                        src={codeIcon}
+                                    />
+                                    <FormattedMessage
+                                        defaultMessage="程序"
+                                        description="Button to get to the code panel"
+                                        id="gui.gui.codeTab"
+                                    />
+                                </Tab>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateCostumesTab}
+                                >
+                                    <img
+                                        draggable={false}
+                                        src={costumesIcon}
+                                    />
+                                    {targetIsStage ? (
+                                        <FormattedMessage
+                                            defaultMessage="造型"
+                                            description="Button to get to the backdrops panel"
+                                            id="gui.gui.backdropsTab"
+                                        />
+                                    ) : (
+                                        <FormattedMessage
+                                            defaultMessage="造型"
+                                            description="Button to get to the costumes panel"
+                                            id="gui.gui.costumesTab"
+                                        />
+                                    )}
+                                </Tab>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateSoundsTab}
+                                >
+                                    <img
+                                        draggable={false}
+                                        src={soundsIcon}
+                                    />
+                                    <FormattedMessage
+                                        defaultMessage="声音"
+                                        description="Button to get to the sounds panel"
+                                        id="gui.gui.soundsTab"
+                                    />
+                                </Tab>
                             </TabList>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 <Box className={styles.blocksWrapper}>
@@ -130,27 +194,12 @@ const GUIComponent = props => {
                     </Box>
 
                     <Box className={styles.stageAndTargetWrapper}>
-                        <Box className={styles.stageMenuWrapper}>
-                            <StageHeader vm={vm} />
-                        </Box>
-                        <Box className={styles.stageWrapper}>
-                            {/* eslint-disable arrow-body-style */}
-                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
-                                return isRendererSupported ? (
-                                    <Stage
-                                        height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
-                                        shrink={0}
-                                        vm={vm}
-                                        width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
-                                    />
-                                ) : null;
-                            }}</MediaQuery>
-                            {/* eslint-enable arrow-body-style */}
-                        </Box>
+                        <StageWrapper
+                            isRendererSupported={isRendererSupported}
+                            vm={vm}
+                        />
                         <Box className={styles.targetWrapper}>
-                            <TargetPane
-                                vm={vm}
-                            />
+                            <TargetPane vm={vm} />
                         </Box>
                     </Box>
                 </Box>
@@ -162,17 +211,22 @@ GUIComponent.propTypes = {
     activeTabIndex: PropTypes.number,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumesTabVisible: PropTypes.bool,
-    feedbackFormVisible: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
+    isPlayerOnly: PropTypes.bool,
     loading: PropTypes.bool,
+    onActivateCostumesTab: PropTypes.func,
+    onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
+    targetIsStage: PropTypes.bool,
+    tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

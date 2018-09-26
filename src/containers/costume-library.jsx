@@ -1,11 +1,22 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
+import config from '../config.js';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
+import spriteTags from '../lib/libraries/sprite-tags';
 import LibraryComponent from '../components/library/library.jsx';
+
+const messages = defineMessages({
+    libraryTitle: {
+        defaultMessage: '造型库',
+        description: 'Heading for the costume library',
+        id: 'gui.costumeLibrary.chooseACostume'
+    }
+});
 
 
 class CostumeLibrary extends React.PureComponent {
@@ -14,6 +25,16 @@ class CostumeLibrary extends React.PureComponent {
         bindAll(this, [
             'handleItemSelected'
         ]);
+        this.state = {costumes: []};
+    }
+    componentWillMount () {
+        const id = window.location.hash.substring(1);
+        if (!id) return this.setState({costumes: costumeLibraryContent});
+        fetch(`${config.services.lessonService}/${id}/costume.json`)
+            .then(res => res.json())
+            .then(content => {
+                this.setState({costumes: content});
+            });
     }
     handleItemSelected (item) {
         const vmCostume = {
@@ -23,9 +44,7 @@ class CostumeLibrary extends React.PureComponent {
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume).then(() => {
-            this.props.onNewCostume();
-        });
+        this.props.vm.addCostume(item.md5, vmCostume);
         analytics.event({
             category: 'library',
             action: 'Select Costume',
@@ -35,8 +54,10 @@ class CostumeLibrary extends React.PureComponent {
     render () {
         return (
             <LibraryComponent
-                data={costumeLibraryContent}
-                title="Costume Library"
+                data={this.state.costumes}
+                id="costumeLibrary"
+                tags={spriteTags}
+                title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemSelected={this.handleItemSelected}
                 onRequestClose={this.props.onRequestClose}
             />
@@ -45,9 +66,9 @@ class CostumeLibrary extends React.PureComponent {
 }
 
 CostumeLibrary.propTypes = {
-    onNewCostume: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default CostumeLibrary;
+export default injectIntl(CostumeLibrary);

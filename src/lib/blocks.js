@@ -28,6 +28,25 @@ export default function (vm) {
         };
     };
 
+    const jsonForHatBlockMenu = function (hatName, name, menuOptionsFn, colors, start) {
+        return {
+            message0: hatName,
+            args0: [
+                {
+                    type: 'field_dropdown',
+                    name: name,
+                    options: function () {
+                        return start.concat(menuOptionsFn());
+                    }
+                }
+            ],
+            colour: colors.primary,
+            colourSecondary: colors.secondary,
+            colourTertiary: colors.tertiary,
+            extensions: ['shape_hat']
+        };
+    };
+
     const soundsMenu = function () {
         if (vm.editingTarget && vm.editingTarget.sprite.sounds.length > 0) {
             return vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
@@ -45,7 +64,17 @@ export default function (vm) {
     const backdropsMenu = function () {
         if (vm.runtime.targets[0] && vm.runtime.targets[0].getCostumes().length > 0) {
             return vm.runtime.targets[0].getCostumes().map(costume => [costume.name, costume.name])
-                .concat([['next backdrop', 'next backdrop'], ['previous backdrop', 'previous backdrop']]);
+                .concat([['next backdrop', 'next backdrop'],
+                    ['previous backdrop', 'previous backdrop'],
+                    ['random backdrop', 'random backdrop']]);
+        }
+        return [['', '']];
+    };
+
+    const backdropNamesMenu = function () {
+        const stage = vm.runtime.getTargetForStage();
+        if (stage && stage.getCostumes().length > 0) {
+            return stage.getCostumes().map(costume => [costume.name, costume.name]);
         }
         return [['', '']];
     };
@@ -74,7 +103,7 @@ export default function (vm) {
             }
             return menu;
         }
-        return [['myself', '_myself_']].concat(spriteMenu());
+        return [['自己', '_myself_']].concat(spriteMenu());
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;
@@ -86,6 +115,8 @@ export default function (vm) {
     const sensingColors = ScratchBlocks.Colours.sensing;
 
     const controlColors = ScratchBlocks.Colours.control;
+
+    const eventColors = ScratchBlocks.Colours.event;
 
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
         const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
@@ -102,25 +133,32 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
+    ScratchBlocks.Blocks.event_whenbackdropswitchesto.init = function () {
+        const json = jsonForHatBlockMenu(
+            ScratchBlocks.Msg.EVENT_WHENBACKDROPSWITCHESTO,
+            'BACKDROP', backdropNamesMenu, eventColors, []);
+        this.jsonInit(json);
+    };
+
     ScratchBlocks.Blocks.motion_pointtowards_menu.init = function () {
         const json = jsonForMenuBlock('TOWARDS', spriteMenu, motionColors, [
-            ['mouse-pointer', '_mouse_']
+            ['鼠标指针', '_mouse_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.motion_goto_menu.init = function () {
         const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
-            ['random position', '_random_'],
-            ['mouse-pointer', '_mouse_']
+            ['随机位置', '_random_'],
+            ['鼠标指针', '_mouse_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.motion_glideto_menu.init = function () {
         const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
-            ['random position', '_random_'],
-            ['mouse-pointer', '_mouse_']
+            ['随机位置', '_random_'],
+            ['鼠标指针', '_mouse_']
         ]);
         this.jsonInit(json);
     };
@@ -132,24 +170,17 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
-    ScratchBlocks.Blocks.sensing_videoonmenutwo.init = function () {
-        const json = jsonForMenuBlock('VIDEOONMENU2', spriteMenu, sensingColors, [
-            ['stage', 'STAGE']
-        ]);
-        this.jsonInit(json);
-    };
-
     ScratchBlocks.Blocks.sensing_distancetomenu.init = function () {
         const json = jsonForMenuBlock('DISTANCETOMENU', spriteMenu, sensingColors, [
-            ['mouse-pointer', '_mouse_']
+            ['鼠标指针', '_mouse_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.sensing_touchingobjectmenu.init = function () {
         const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, sensingColors, [
-            ['mouse-pointer', '_mouse_'],
-            ['edge', '_edge_']
+            ['鼠标指针', '_mouse_'],
+            ['边缘', '_edge_']
         ]);
         this.jsonInit(json);
     };

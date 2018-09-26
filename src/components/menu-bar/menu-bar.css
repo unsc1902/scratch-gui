@@ -24,6 +24,8 @@
         width: 100%;
     */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: .75rem;
+    font-weight: bold;
     background-color: $ui-background-blue;
     color: white;
 }
@@ -33,63 +35,136 @@
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: nowrap;
-}
-
-/*
-    Using a wrapper so when logo is hovered, it transforms via its center point
-    @todo: not sure if this is needed
-*/
-.logo-wrapper {
+    align-items: center;
 }
 
 .scratch-logo {
-    height:  $menu-bar-height;
-    padding: 0.8rem 0;
+    height:  1.6rem;
+    vertical-align: middle;
 }
 
-.scratch-logo:hover {
-    transform: scale(1.1, 1.1);
-    background-size: 100%;
-    transition: all .075s ease-in;
+.menu {
+    /* blocklyToolboxDiv is 40 */
+    z-index: 50;
+    top: $menu-bar-height;
 }
 
-.title {
-    display: inline-block;
-    margin: 0 2rem;
-}
-
-.menu-item {
-    display: block;
-    padding: 0 1.5rem;
-    line-height: $menu-bar-height;
-    cursor: pointer;
+.menu-bar-item {
+    display: flex;
+    padding: 0 0.25rem;
     text-decoration: none;
     color: $menu-item;
     user-select: none;
+    align-self: center;
+    position: relative;
+    align-items: center;
+    height: $menu-bar-height;
 }
 
-.feedback-button-wrapper {
-    align-self: center;
-    padding: 0 .5rem;
-    line-height: $menu-bar-height;
+.menu-bar-item.hoverable {
+    cursor: pointer;
+}
+
+.menu-bar-item.active,
+.menu-bar-item.hoverable:hover {
+    background-color: $ui-black-transparent;
+}
+
+.file-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.file-group .menu-bar-item {
+    padding: 0 0.75rem;
+}
+
+.feedback-link {
+    color: $menu-item;
+    background-color: #FFF;
+    text-decoration: none;
 }
 
 .feedback-button {
     border-radius: 5px;
-    padding: .75rem;
-    background-color: #FFF;
-    cursor: pointer;
-    font-size: .75rem;
-    font-weight: bold;
+    background-color: $ui-white;
+    height: 34px;
+}
+
+.divider {
+    margin: 0 .5rem;
+    height: 34px;
+}
+
+.title-field {
+    border: 1px dashed $ui-black-transparent;
+    border-radius: .25rem;
+    width: 12rem;
+    height: 34px;
+    background-color: transparent;
+    padding: .5rem;
+}
+
+.title-field,
+.title-field::placeholder {
     color: $menu-item;
+    font-weight: bold;
+    font-size: .8rem;
 }
 
-.feedback-button-icon {
-    vertical-align: middle;
+.share-button {
+    background: $data-primary;
+    height: 32px;
+    box-shadow: 0 0 0 1px $ui-black-transparent;
 }
 
-.feedback-button-icon {
-    margin-right: .5rem;
-    width: 1.5rem;
-    height: 1.5rem;
+.community-button {
+    height: 32px;
+    box-shadow: 0 0 0 1px $ui-black-transparent;
+}
+
+.community-button-icon {
+    height: 1.25rem;
+}
+
+.coming-soon >:not(.coming-soon-tooltip) {
+    opacity: 0.5;
+}
+
+.account-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 0 .5rem;
+    align-items: center;
+}
+
+.mystuff-icon {
+    margin: 0 .25rem;
+    height: 1rem;
+}
+
+.help-icon {
+    height: 2rem;
+    width: 3rem;
+    margin-top: 0.5rem;
+}
+
+.account-nav-menu, .mystuff-button {
+    padding: 0 .25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile-icon {
+    margin: 0 .25rem;
+    width: 2rem;
+    border-radius: 0.25rem;
+}
+
+.dropdown-caret-icon {
+    margin-left: .5rem;
+    width: 0.5rem;
+    height: 0.5rem;
 }

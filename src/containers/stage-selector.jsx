@@ -10,30 +10,39 @@ import StageSelectorComponent from '../components/stage-selector/stage-selector.
 
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
+import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
 class StageSelector extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleClick',
+            'handleNewBackdrop',
             'handleSurpriseBackdrop',
             'handleEmptyBackdrop',
-            'addBackdropFromLibraryItem'
+            'addBackdropFromLibraryItem',
+            'handleFileUploadClick',
+            'handleBackdropUpload',
+            'setFileInput'
         ]);
     }
     addBackdropFromLibraryItem (item) {
         const vmBackdrop = {
             name: item.name,
+            md5: item.md5,
             rotationCenterX: item.info[0] && item.info[0] / 2,
             rotationCenterY: item.info[1] && item.info[1] / 2,
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        return this.props.vm.addBackdrop(item.md5, vmBackdrop);
+        this.handleNewBackdrop(vmBackdrop);
     }
-    handleClick (e) {
-        e.preventDefault();
+    handleClick () {
         this.props.onSelect(this.props.id);
+    }
+    handleNewBackdrop (backdrop) {
+        this.props.vm.addBackdrop(backdrop.md5, backdrop).then(() =>
+            this.props.onActivateTab(COSTUMES_TAB_INDEX));
     }
     handleSurpriseBackdrop () {
         // @todo should this not add a backdrop you already have?
@@ -44,10 +53,20 @@ class StageSelector extends React.Component {
         // @todo this is brittle, will need to be refactored for localized libraries
         const emptyItem = costumeLibraryContent.find(item => item.name === 'Empty');
         if (emptyItem) {
-            this.addBackdropFromLibraryItem(emptyItem).then(() => {
-                this.props.onActivateTab(COSTUMES_TAB_INDEX);
-            });
+            this.addBackdropFromLibraryItem(emptyItem);
         }
+    }
+    handleBackdropUpload (e) {
+        const storage = this.props.vm.runtime.storage;
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            costumeUpload(buffer, fileType, fileName, storage, this.handleNewBackdrop);
+        });
+    }
+    handleFileUploadClick () {
+        this.fileInput.click();
+    }
+    setFileInput (input) {
+        this.fileInput = input;
     }
     render () {
         const {
@@ -61,9 +80,13 @@ class StageSelector extends React.Component {
         } = this.props;
         return (
             <StageSelectorComponent
+                fileInputRef={this.setFileInput}
+                onBackdropFileUpload={this.handleBackdropUpload}
+                onBackdropFileUploadClick={this.handleFileUploadClick}
                 onClick={this.handleClick}
                 onEmptyBackdropClick={this.handleEmptyBackdrop}
                 onSurpriseBackdropClick={this.handleSurpriseBackdrop}
+
                 {...componentProps}
             />
         );
@@ -83,6 +106,7 @@ const mapStateToProps = (state, {assetId}) => ({
 const mapDispatchToProps = dispatch => ({
     onNewBackdropClick: e => {
         e.preventDefault();
+        dispatch(activateTab(COSTUMES_TAB_INDEX));
         dispatch(openBackdropLibrary());
     },
     onActivateTab: tabIndex => {

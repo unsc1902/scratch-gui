@@ -33,72 +33,72 @@ const messages = defineMessages({
     sound: {
         id: 'gui.soundEditor.sound',
         description: 'Label for the name of the sound',
-        defaultMessage: 'Sound'
+        defaultMessage: '声音'
     },
     play: {
         id: 'gui.soundEditor.play',
         description: 'Title of the button to start playing the sound',
-        defaultMessage: 'Play'
+        defaultMessage: '播放'
     },
     stop: {
         id: 'gui.soundEditor.stop',
         description: 'Title of the button to stop the sound',
-        defaultMessage: 'Stop'
+        defaultMessage: '停止'
     },
     trim: {
         id: 'gui.soundEditor.trim',
         description: 'Title of the button to start trimminging the sound',
-        defaultMessage: 'Trim'
+        defaultMessage: '剪辑'
     },
     save: {
         id: 'gui.soundEditor.save',
         description: 'Title of the button to save trimmed sound',
-        defaultMessage: 'Save'
+        defaultMessage: '保存'
     },
     undo: {
         id: 'gui.soundEditor.undo',
         description: 'Title of the button to undo',
-        defaultMessage: 'Undo'
+        defaultMessage: '撤销'
     },
     redo: {
         id: 'gui.soundEditor.redo',
         description: 'Title of the button to redo',
-        defaultMessage: 'Redo'
+        defaultMessage: '重做'
     },
     faster: {
         id: 'gui.soundEditor.faster',
         description: 'Title of the button to apply the faster effect',
-        defaultMessage: 'Faster'
+        defaultMessage: '变快'
     },
     slower: {
         id: 'gui.soundEditor.slower',
         description: 'Title of the button to apply the slower effect',
-        defaultMessage: 'Slower'
+        defaultMessage: '变慢'
     },
     echo: {
         id: 'gui.soundEditor.echo',
         description: 'Title of the button to apply the echo effect',
-        defaultMessage: 'Echo'
+        defaultMessage: '重复'
     },
     robot: {
         id: 'gui.soundEditor.robot',
         description: 'Title of the button to apply the robot effect',
-        defaultMessage: 'Robot'
+        defaultMessage: '机器人'
     },
     louder: {
         id: 'gui.soundEditor.louder',
         description: 'Title of the button to apply the louder effect',
-        defaultMessage: 'Louder'
+        defaultMessage: '变响'
     },
     softer: {
         id: 'gui.soundEditor.softer',
         description: 'Title of the button to apply thr.softer effect',
-        defaultMessage: 'Softer'
+        defaultMessage: '变轻'
     },
     reverse: {
         id: 'gui.soundEditor.reverse',
         description: 'Title of the button to apply the reverse effect',
-        defaultMessage: 'Reverse'
+        defaultMessage: '反转'
     }
 });
 
