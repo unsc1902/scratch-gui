@@ -4,9 +4,9 @@ const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 const motion = function (isStage, targetId) {
     return `
-    <category name="运动" colour="#4C97FF" secondaryColour="#3373CC">
+    <category name="运动" id="motion" colour="#4C97FF" secondaryColour="#3373CC">
         ${isStage ? `
-        <label text="Stage selected: no motion blocks"></label>
+        <label text="此区域：没有运动积木"></label>
         ` : `
         <block type="motion_movesteps">
             <value name="STEPS">
@@ -15,7 +15,27 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
+        <block type="motion_turnright">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_turnleft">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
         ${blockSeparator}
+        <block type="motion_goto">
+            <value name="TO">
+                <shadow type="motion_goto_menu">
+                </shadow>
+            </value>
+        </block>
         <block type="motion_gotoxy">
             <value name="X">
                 <shadow id="movex" type="math_number">
@@ -28,9 +48,14 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
-        <block type="motion_goto">
+        <block type="motion_glideto" id="motion_glideto">
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
             <value name="TO">
-                <shadow type="motion_goto_menu">
+                <shadow type="motion_glideto_menu">
                 </shadow>
             </value>
         </block>
@@ -51,32 +76,7 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
-        <block type="motion_glideto" id="motion_glideto">
-            <value name="SECS">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="TO">
-                <shadow type="motion_glideto_menu">
-                </shadow>
-            </value>
-        </block>
         ${blockSeparator}
-        <block type="motion_turnright">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_turnleft">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
         <block type="motion_pointindirection">
             <value name="DIRECTION">
                 <shadow type="math_angle">
@@ -134,7 +134,7 @@ const motion = function (isStage, targetId) {
 
 const looks = function (isStage, targetId) {
     return `
-    <category name="外观" colour="#9966FF" secondaryColour="#774DCB">
+    <category name="外观" id="looks" colour="#9966FF" secondaryColour="#774DCB">
         ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
@@ -189,7 +189,7 @@ const looks = function (isStage, targetId) {
             </block>
             <block type="looks_nextbackdrop"/>
         ` : `
-            <block type="looks_switchcostumeto">
+            <block id="${targetId}_switchcostumeto" type="looks_switchcostumeto">
                 <value name="COSTUME">
                     <shadow type="looks_costume"/>
                 </value>
@@ -234,10 +234,10 @@ const looks = function (isStage, targetId) {
         </block>
         <block type="looks_cleargraphiceffects"/>
         ${blockSeparator}
-        <block type="looks_show"/>
-        <block type="looks_hide"/>
-        ${blockSeparator}
         ${isStage ? '' : `
+            <block type="looks_show"/>
+            <block type="looks_hide"/>
+        ${blockSeparator}
             <block type="looks_gotofrontback"/>
             <block type="looks_goforwardbackwardlayers">
                 <value name="NUM">
@@ -246,7 +246,6 @@ const looks = function (isStage, targetId) {
                     </shadow>
                 </value>
             </block>
-            ${blockSeparator}
         `}
         ${isStage ? `
             <block id="backdropnumbername" type="looks_backdropnumbername"/>
@@ -260,15 +259,15 @@ const looks = function (isStage, targetId) {
     `;
 };
 
-const sound = function () {
+const sound = function (isStage, targetId) {
     return `
-    <category name="声音" colour="#D65CD6" secondaryColour="#BD42BD">
-        <block type="sound_play">
+    <category name="声音" id="sound" colour="#D65CD6" secondaryColour="#BD42BD">
+        <block id="${targetId}_sound_play" type="sound_play">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu"/>
             </value>
         </block>
-        <block type="sound_playuntildone">
+        <block id="${targetId}_sound_playuntildone" type="sound_playuntildone">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu"/>
             </value>
@@ -311,13 +310,17 @@ const sound = function () {
     `;
 };
 
-const events = function () {
+const events = function (isStage) {
     return `
-    <category name="事件" colour="#FFD500" secondaryColour="#CC9900">
+    <category name="事件" id="events" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
         <block type="event_whenkeypressed">
         </block>
-        <block type="event_whenthisspriteclicked"/>
+        ${isStage ? `
+            <block type="event_whenstageclicked"/>
+        ` : `
+            <block type="event_whenthisspriteclicked"/>
+        `}
         <block type="event_whenbackdropswitchesto">
         </block>
         ${blockSeparator}
@@ -348,7 +351,7 @@ const events = function () {
 
 const control = function (isStage) {
     return `
-    <category name="控制" colour="#FFAB19" secondaryColour="#CF8B17">
+    <category name="控制" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
             <value name="DURATION">
                 <shadow type="math_positive_number">
@@ -395,7 +398,7 @@ const control = function (isStage) {
 
 const sensing = function (isStage) {
     return `
-    <category name="侦测" colour="#4CBFE6" secondaryColour="#2E8EB8">
+    <category name="侦测" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
@@ -431,7 +434,11 @@ const sensing = function (isStage) {
         </block>
         <block id="answer" type="sensing_answer"/>
         ${blockSeparator}
-        <block type="sensing_keypressed"/>
+        <block type="sensing_keypressed">
+            <value name="KEY_OPTION">
+                <shadow type="sensing_keyoptions"/>
+            </value>
+        </block>
         <block type="sensing_mousedown"/>
         <block type="sensing_mousex"/>
         <block type="sensing_mousey"/>
@@ -461,7 +468,7 @@ const sensing = function (isStage) {
 
 const operators = function () {
     return `
-    <category name="运算" colour="#40BF4A" secondaryColour="#389438">
+    <category name="运算" id="operators" colour="#40BF4A" secondaryColour="#389438">
         <block type="operator_add">
             <value name="NUM1">
                 <shadow type="math_number">
@@ -524,6 +531,18 @@ const operators = function () {
             </value>
         </block>
         ${blockSeparator}
+        <block type="operator_gt">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">100</field>
+                </shadow>
+            </value>
+        </block>
         <block type="operator_lt">
             <value name="OPERAND1">
                 <shadow type="text">
@@ -532,7 +551,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">100</field>
                 </shadow>
             </value>
         </block>
@@ -544,19 +563,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-        </block>
-        <block type="operator_gt">
-            <value name="OPERAND1">
-                <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-            <value name="OPERAND2">
-                <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">100</field>
                 </shadow>
             </value>
         </block>
@@ -568,12 +575,12 @@ const operators = function () {
         <block type="operator_join">
             <value name="STRING1">
                 <shadow type="text">
-                    <field name="TEXT">hello</field>
+                    <field name="TEXT">apple</field>
                 </shadow>
             </value>
             <value name="STRING2">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">banana</field>
                 </shadow>
             </value>
         </block>
@@ -585,26 +592,26 @@ const operators = function () {
             </value>
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">apple</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_length">
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">apple</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_contains" id="operator_contains">
           <value name="STRING1">
             <shadow type="text">
-              <field name="TEXT">hello</field>
+              <field name="TEXT">apple</field>
             </shadow>
           </value>
           <value name="STRING2">
             <shadow type="text">
-              <field name="TEXT">world</field>
+              <field name="TEXT">a</field>
             </shadow>
           </value>
         </block>
@@ -643,14 +650,14 @@ const operators = function () {
 
 const variables = function () {
     return `
-    <category name="数据" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
+    <category name="数据" id="variables" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
     </category>
     `;
 };
 
 const myBlocks = function () {
     return `
-    <category name="我的积木" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
+    <category name="我的积木" id="myBlocks" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
     </category>
     `;
 };

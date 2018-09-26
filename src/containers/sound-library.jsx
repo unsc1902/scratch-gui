@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
@@ -9,7 +10,17 @@ import LibraryComponent from '../components/library/library.jsx';
 
 import soundIcon from '../components/asset-panel/icon--sound.svg';
 
+import config from '../config.js';
 import soundLibraryContent from '../lib/libraries/sounds.json';
+import soundTags from '../lib/libraries/sound-tags';
+
+const messages = defineMessages({
+    libraryTitle: {
+        defaultMessage: '声音库',
+        description: 'Heading for the sound library',
+        id: 'gui.soundLibrary.chooseASound'
+    }
+});
 
 class SoundLibrary extends React.PureComponent {
     constructor (props) {
@@ -19,6 +30,16 @@ class SoundLibrary extends React.PureComponent {
             'handleItemMouseEnter',
             'handleItemMouseLeave'
         ]);
+        this.state = {sounds: []};
+    }
+    componentWillMount () {
+        const id = window.location.hash.substring(1);
+        if (!id) return this.setState({sounds: soundLibraryContent});
+        fetch(`${config.services.lessonService}/${id}/sound.json`)
+            .then(res => res.json())
+            .then(content => {
+                this.setState({sounds: content});
+            });
     }
     componentDidMount () {
         this.audioEngine = new AudioEngine();
@@ -68,7 +89,7 @@ class SoundLibrary extends React.PureComponent {
     }
     render () {
         // @todo need to use this hack to avoid library using md5 for image
-        const soundLibraryThumbnailData = soundLibraryContent.map(sound => {
+        const soundLibraryThumbnailData = this.state.sounds.map(sound => {
             const {
                 md5,
                 ...otherData
@@ -83,7 +104,9 @@ class SoundLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={soundLibraryThumbnailData}
-                title="声音库"
+                id="soundLibrary"
+                tags={soundTags}
+                title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemMouseEnter={this.handleItemMouseEnter}
                 onItemMouseLeave={this.handleItemMouseLeave}
                 onItemSelected={this.handleItemSelected}
@@ -94,9 +117,10 @@ class SoundLibrary extends React.PureComponent {
 }
 
 SoundLibrary.propTypes = {
+    intl: intlShape.isRequired,
     onNewSound: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default SoundLibrary;
+export default injectIntl(SoundLibrary);

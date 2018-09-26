@@ -1,12 +1,23 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {injectIntl, intlShape, defineMessages} from 'react-intl';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
+import config from '../config.js';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
+import spriteTags from '../lib/libraries/sprite-tags';
 
 import LibraryComponent from '../components/library/library.jsx';
+
+const messages = defineMessages({
+    libraryTitle: {
+        defaultMessage: '角色库',
+        description: 'Heading for the sprite library',
+        id: 'gui.spriteLibrary.chooseASprite'
+    }
+});
 
 class SpriteLibrary extends React.PureComponent {
     constructor (props) {
@@ -22,14 +33,23 @@ class SpriteLibrary extends React.PureComponent {
         this.state = {
             activeSprite: null,
             costumeIndex: 0,
-            sprites: spriteLibraryContent
+            sprites: []
         };
+    }
+    componentWillMount () {
+        const id = window.location.hash.substring(1);
+        if (!id) return this.setState({sprites: spriteLibraryContent});
+        fetch(`${config.services.lessonService}/${id}/sprite.json`)
+            .then(res => res.json())
+            .then(content => {
+                this.setState({sprites: content});
+            });
     }
     componentWillUnmount () {
         clearInterval(this.intervalId);
     }
     handleItemSelect (item) {
-        this.props.vm.addSprite2(JSON.stringify(item.json));
+        this.props.vm.addSprite(JSON.stringify(item.json));
         analytics.event({
             category: 'library',
             action: 'Select Sprite',
@@ -71,7 +91,9 @@ class SpriteLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={this.state.sprites}
-                title="角色库"
+                id="spriteLibrary"
+                tags={spriteTags}
+                title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemMouseEnter={this.handleMouseEnter}
                 onItemMouseLeave={this.handleMouseLeave}
                 onItemSelected={this.handleItemSelect}
@@ -82,8 +104,9 @@ class SpriteLibrary extends React.PureComponent {
 }
 
 SpriteLibrary.propTypes = {
+    intl: intlShape.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default SpriteLibrary;
+export default injectIntl(SpriteLibrary);

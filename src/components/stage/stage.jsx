@@ -12,6 +12,7 @@ import styles from './stage.css';
 const StageComponent = props => {
     const {
         canvasRef,
+        dragRef,
         height,
         isColorPicking,
         isFullScreen,
@@ -20,11 +21,12 @@ const StageComponent = props => {
         onDeactivateColorPicker,
         question,
         onQuestionAnswered,
+        useEditorDragStyle,
         ...boxProps
     } = props;
 
     const stageSize = getStageSize(isFullScreen, height, width);
-    
+
     return (
         <div>
             <Box
@@ -46,7 +48,10 @@ const StageComponent = props => {
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
-                    <MonitorList />
+                    <MonitorList
+                        draggable={useEditorDragStyle}
+                        stageSize={stageSize}
+                    />
                 </Box>
                 {isColorPicking && colorInfo ? (
                     <Box className={styles.colorPickerWrapper}>
@@ -71,6 +76,12 @@ const StageComponent = props => {
                         </div>
                     </div>
                 )}
+                <canvas
+                    className={styles.draggingSprite}
+                    height={0}
+                    ref={dragRef}
+                    width={0}
+                />
             </Box>
             {isColorPicking ? (
                 <Box
@@ -84,16 +95,19 @@ const StageComponent = props => {
 StageComponent.propTypes = {
     canvasRef: PropTypes.func,
     colorInfo: Loupe.propTypes.colorInfo,
+    dragRef: PropTypes.func,
     height: PropTypes.number,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     onDeactivateColorPicker: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
+    useEditorDragStyle: PropTypes.bool,
     width: PropTypes.number
 };
 StageComponent.defaultProps = {
     canvasRef: () => {},
+    dragRef: () => {},
     width: 480,
     height: 360
 };
