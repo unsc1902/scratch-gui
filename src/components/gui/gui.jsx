@@ -1,7 +1,10 @@
 import classNames from 'classnames';
+import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {connect} from 'react-redux';
+import MediaQuery from 'react-responsive';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
@@ -15,12 +18,20 @@ import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+import CostumeLibrary from '../../containers/costume-library.jsx';
+import BackdropLibrary from '../../containers/backdrop-library.jsx';
 
+import Backpack from '../../containers/backpack.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
+import Alerts from '../../containers/alerts.jsx';
+import DragLayer from '../../containers/drag-layer.jsx';
+
+import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
+import {resolveStageSize} from '../../lib/screen-utils';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -36,33 +47,52 @@ const messages = defineMessages({
     }
 });
 
-// Cache this value to only retreive it once the first time.
+// Cache this value to only retrieve it once the first time.
 // Assume that it doesn't change for a session.
 let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
+        accountNavOpen,
         activeTabIndex,
+        alertsVisible,
         basePath,
+        backdropLibraryVisible,
+        backpackOptions,
         blocksTabVisible,
         cardsVisible,
         children,
+        costumeLibraryVisible,
         costumesTabVisible,
+        enableCommunity,
         importInfoVisible,
         intl,
         isPlayerOnly,
+        isRtl,
         loading,
-        onExtensionButtonClick,
+        renderLogin,
+        onClickAccountNav,
+        onCloseAccountNav,
+        onLogOut,
+        onOpenRegistration,
+        onToggleLoginOpen,
+        onUpdateProjectTitle,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onExtensionButtonClick,
+        onRequestCloseBackdropLibrary,
+        onRequestCloseCostumeLibrary,
+        onSeeCommunity,
+        onShare,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
+        stageSizeMode,
         tipsLibraryVisible,
         vm,
         ...componentProps
-    } = props;
+    } = omit(props, 'dispatch');
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
@@ -79,157 +109,125 @@ const GUIComponent = props => {
     if (isRendererSupported === null) {
         isRendererSupported = Renderer.isSupported();
     }
-
-    return isPlayerOnly ? (
-        <StageWrapper
-            isRendererSupported={isRendererSupported}
-            vm={vm}
-        />
-    ) : (
-        <Box
-            className={styles.pageWrapper}
-            {...componentProps}
-        >
-            {/* {previewInfoVisible ? (
-                <PreviewModal />
-            ) : null} */}
-            {loading ? (
-                <Loader />
-            ) : null}
-            {importInfoVisible ? (
-                <ImportModal />
-            ) : null}
-            {isRendererSupported ? null : (
-                <WebGlModal />
-            )}
-            {tipsLibraryVisible ? (
-                <TipsLibrary />
-            ) : null}
-            {cardsVisible ? (
-                <Cards />
-            ) : null}
-            <MenuBar />
-            <Box className={styles.bodyWrapper}>
-                <Box className={styles.flexWrapper}>
-                    <Box className={styles.editorWrapper}>
-                        <Tabs
-                            className={tabClassNames.tabs}
-                            forceRenderTabPanel={true} // eslint-disable-line react/jsx-boolean-value
-                            selectedIndex={activeTabIndex}
-                            selectedTabClassName={tabClassNames.tabSelected}
-                            selectedTabPanelClassName={tabClassNames.tabPanelSelected}
-                            onSelect={onActivateTab}
-                        >
-                            <TabList
-                                className={tabClassNames.tabList}
-                                style={{width: '500px'}}
-                            >
-                                <Tab className={tabClassNames.tab}>
-                                    <img
-                                        draggable={false}
-                                        src={codeIcon}
-                                    />
-                                    <FormattedMessage
-                                        defaultMessage="程序"
-                                        description="Button to get to the code panel"
-                                        id="gui.gui.codeTab"
-                                    />
-                                </Tab>
-                                <Tab
-                                    className={tabClassNames.tab}
-                                    onClick={onActivateCostumesTab}
-                                >
-                                    <img
-                                        draggable={false}
-                                        src={costumesIcon}
-                                    />
-                                    {targetIsStage ? (
-                                        <FormattedMessage
-                                            defaultMessage="造型"
-                                            description="Button to get to the backdrops panel"
-                                            id="gui.gui.backdropsTab"
                                         />
-                                    ) : (
-                                        <FormattedMessage
-                                            defaultMessage="造型"
-                                            description="Button to get to the costumes panel"
-                                            id="gui.gui.costumesTab"
+                                    </Tab>
+                                </TabList>
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    <Box className={styles.blocksWrapper}>
+                                        <Blocks
+                                            grow={1}
+                                            isVisible={blocksTabVisible}
+                                            options={{
+                                                media: `${basePath}static/blocks-media/`
+                                            }}
+                                            stageSize={stageSize}
+                                            vm={vm}
                                         />
-                                    )}
-                                </Tab>
-                                <Tab
-                                    className={tabClassNames.tab}
-                                    onClick={onActivateSoundsTab}
-                                >
-                                    <img
-                                        draggable={false}
-                                        src={soundsIcon}
-                                    />
-                                    <FormattedMessage
-                                        defaultMessage="声音"
-                                        description="Button to get to the sounds panel"
-                                        id="gui.gui.soundsTab"
-                                    />
-                                </Tab>
-                            </TabList>
-                            <TabPanel className={tabClassNames.tabPanel}>
-                                <Box className={styles.blocksWrapper}>
-                                    <Blocks
-                                        grow={1}
-                                        isVisible={blocksTabVisible}
-                                        options={{
-                                            media: `${basePath}static/blocks-media/`
-                                        }}
-                                        vm={vm}
-                                    />
-                                </Box>
-                            </TabPanel>
-                            <TabPanel className={tabClassNames.tabPanel}>
-                                {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
-                            </TabPanel>
-                            <TabPanel className={tabClassNames.tabPanel}>
-                                {soundsTabVisible ? <SoundTab vm={vm} /> : null}
-                            </TabPanel>
-                        </Tabs>
-                    </Box>
+                                    </Box>
+                                    <Box className={styles.extensionButtonContainer}>
+                                        <button
+                                            className={styles.extensionButton}
+                                            title={intl.formatMessage(messages.addExtension)}
+                                            onClick={onExtensionButtonClick}
+                                        >
+                                            <img
+                                                className={styles.extensionButtonIcon}
+                                                draggable={false}
+                                                src={addExtensionIcon}
+                                            />
+                                        </button>
+                                    </Box>
+                                </TabPanel>
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
+                                </TabPanel>
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+                                </TabPanel>
+                            </Tabs>
+                            {backpackOptions.visible ? (
+                                <Backpack host={backpackOptions.host} />
+                            ) : null}
+                        </Box>
 
-                    <Box className={styles.stageAndTargetWrapper}>
-                        <StageWrapper
-                            isRendererSupported={isRendererSupported}
-                            vm={vm}
-                        />
-                        <Box className={styles.targetWrapper}>
-                            <TargetPane vm={vm} />
+                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
+                            <StageWrapper
+                                isRendererSupported={isRendererSupported}
+                                stageSize={stageSize}
+                                vm={vm}
+                            />
+                            <Box className={styles.targetWrapper}>
+                                <TargetPane
+                                    stageSize={stageSize}
+                                    vm={vm}
+                                />
+                            </Box>
                         </Box>
                     </Box>
                 </Box>
+                <DragLayer />
             </Box>
-        </Box>
-    );
+        );
+    }}</MediaQuery>);
 };
+
 GUIComponent.propTypes = {
+    accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
+    backdropLibraryVisible: PropTypes.bool,
+    backpackOptions: PropTypes.shape({
+        host: PropTypes.string,
+        visible: PropTypes.bool
+    }),
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
+    costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
+    enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,
+    isRtl: PropTypes.bool,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
+    onClickAccountNav: PropTypes.func,
+    onCloseAccountNav: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
+    onLogOut: PropTypes.func,
+    onOpenRegistration: PropTypes.func,
+    onRequestCloseBackdropLibrary: PropTypes.func,
+    onRequestCloseCostumeLibrary: PropTypes.func,
+    onSeeCommunity: PropTypes.func,
+    onShare: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onToggleLoginOpen: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
+    renderLogin: PropTypes.func,
     soundsTabVisible: PropTypes.bool,
+    stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    basePath: './'
+    backpackOptions: {
+        host: null,
+        visible: false
+    },
+    basePath: './',
+    stageSizeMode: STAGE_SIZE_MODES.large
 };
-export default injectIntl(GUIComponent);
+
+const mapStateToProps = state => ({
+    // This is the button's mode, as opposed to the actual current state
+    stageSizeMode: state.scratchGui.stageSize.stageSize
+});
+
+export default injectIntl(connect(
+    mapStateToProps
+)(GUIComponent));

@@ -5,7 +5,9 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 
+import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
+import {setProjectTitle} from '../reducers/project-title';
 import {
     activateTab,
     BLOCKS_TAB_INDEX,
@@ -60,13 +62,21 @@ class GUI extends React.Component {
                     });
             });
         }
-    }
-    componentWillUnmount () {
-        this.props.vm.stopAll();
+        if (this.props.projectTitle !== nextProps.projectTitle) {
+            this.props.onUpdateReduxProjectTitle(nextProps.projectTitle);
+        }
     }
     render () {
         if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
         const {
+            /* eslint-disable no-unused-vars */
+            assetHost,
+            hideIntro,
+            onUpdateReduxProjectTitle,
+            projectData,
+            projectHost,
+            projectTitle,
+            /* eslint-enable no-unused-vars */
             children,
             fetchingProject,
             loadingStateVisible,
@@ -89,6 +99,7 @@ class GUI extends React.Component {
 GUI.propTypes = {
     ...GUIComponent.propTypes,
     fetchingProject: PropTypes.bool,
+    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,

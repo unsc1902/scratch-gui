@@ -39,5 +39,9 @@ const updateTargets = function (targetList, editingTarget) {
 };
 export {
     reducer as default,
+<<<<<<< HEAD
+=======
+    initialState as targetsInitialState,
+>>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
     updateTargets
 };
