@@ -112,3 +112,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(ProjectLoader);
+(injectIntl(ProjectLoader));

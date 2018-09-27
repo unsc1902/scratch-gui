@@ -4,6 +4,11 @@ import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import VM from 'scratch-vm';
 
+import {
+    activateTab,
+    COSTUMES_TAB_INDEX
+} from '../reducers/editor-tab';
+
 import analytics from '../lib/analytics';
 import config from '../config.js';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
@@ -68,6 +73,7 @@ class BackdropLibrary extends React.Component {
 BackdropLibrary.propTypes = {
     intl: intlShape.isRequired,
     onRequestClose: PropTypes.func,
+    stageID: PropTypes.string.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

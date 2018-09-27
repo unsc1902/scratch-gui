@@ -27,6 +27,8 @@ class PreviewModal extends React.Component {
     }
     handleTryIt () {
         this.setState({previewing: true});
+        // try to run in fullscreen mode on tablets.
+        tabletFullScreen();
         this.props.onTryIt();
     }
     handleCancel () {
@@ -38,24 +40,25 @@ class PreviewModal extends React.Component {
     render () {
         return (supportedBrowser() ?
             <PreviewModalComponent
+                isRtl={this.props.isRtl}
                 previewing={this.state.previewing}
                 onCancel={this.handleCancel}
                 onTryIt={this.handleTryIt}
                 onViewProject={this.handleViewProject}
-            /> :
-            <BrowserModalComponent
-                onBack={this.handleCancel}
             />
         );
     }
 }
 
 PreviewModal.propTypes = {
+    isRtl: PropTypes.bool,
     onTryIt: PropTypes.func,
     onViewProject: PropTypes.func
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    isRtl: state.locales.isRtl
+});
 
 const mapDispatchToProps = dispatch => ({
     onTryIt: () => {

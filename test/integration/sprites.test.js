@@ -51,12 +51,10 @@ describe('Working with sprites', () => {
 
     test('Deleting only sprite does not crash', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await rightClickText('Sprite1', scope.spriteTile);
         await clickText('delete', scope.spriteTile);
-        await driver.switchTo().alert()
-            .accept();
         // Confirm that the stage has been switched to
         await findByText('Stage selected: no motion blocks');
         const logs = await getLogs();

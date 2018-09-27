@@ -4,6 +4,7 @@ import Box from '../box/box.jsx';
 import Monitor from '../../containers/monitor.jsx';
 import PropTypes from 'prop-types';
 import {OrderedMap} from 'immutable';
+import {stageSizeToTransform} from '../../lib/screen-utils';
 
 import styles from './monitor-list.css';
 
@@ -24,9 +25,7 @@ const MonitorList = props => (
     >
         <Box
             className={styles.monitorListScaler}
-            style={{
-                transform: stageSizeToTransform(props.stageSize)
-            }}
+            style={stageSizeToTransform(props.stageSize)}
         >
             {props.monitors.valueSeq().filter(m => m.visible)
                 .map(monitorData => (

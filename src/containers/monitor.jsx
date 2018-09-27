@@ -7,6 +7,18 @@ import MonitorComponent, {monitorModes} from '../components/monitor/monitor.jsx'
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
 
 import {connect} from 'react-redux';
+import VM from 'scratch-vm';
+
+const availableModes = opcode => (
+    monitorModes.filter(t => {
+        if (opcode === 'data_variable') {
+            return t !== 'list';
+        } else if (opcode === 'data_listcontents') {
+            return t === 'list';
+        }
+        return t !== 'slider' && t !== 'list';
+    })
+);
 
 const availableModes = opcode => (
     monitorModes.filter(t => {
@@ -152,7 +164,8 @@ Monitor.propTypes = {
     y: PropTypes.number
 };
 const mapStateToProps = state => ({
-    monitorLayout: state.monitorLayout
+    monitorLayout: state.scratchGui.monitorLayout,
+    vm: state.scratchGui.vm
 });
 const mapDispatchToProps = dispatch => ({
     addMonitorRect: (id, rect, savePosition) =>

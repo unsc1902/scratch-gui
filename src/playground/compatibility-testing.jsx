@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {connect} from 'react-redux';
 
 import Controls from '../containers/controls.jsx';
 import Stage from '../containers/stage.jsx';
@@ -10,8 +9,6 @@ import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 
 const mapStateToProps = state => ({vm: state.vm});
 
-const VMStage = connect(mapStateToProps)(Stage);
-const VMControls = connect(mapStateToProps)(Controls);
 
 const DEFAULT_PROJECT_ID = '10015059';
 
@@ -37,27 +34,12 @@ class Player extends React.Component {
         this.setState({projectId: window.location.hash.substring(1)});
     }
     render () {
-        const width = 480;
-        const height = 360;
         return (
             <div style={{display: 'flex'}}>
-                <GUI
-                    {...this.props}
-                    width={width}
-                >
-                    <Box height={40}>
-                        <VMControls
-                            style={{
-                                marginRight: 10,
-                                height: 40
-                            }}
-                        />
-                    </Box>
-                    <VMStage
-                        height={height}
-                        width={width}
-                    />
-                </GUI>
+                <WrappedGui
+                    isPlayerOnly
+                    isFullScreen={false}
+                />
                 <iframe
                     allowFullScreen
                     allowTransparency
@@ -76,4 +58,4 @@ const App = HashParserHOC(Player);
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
 
-ReactDOM.render(<App />, appTarget);
+ReactDOM.render(<Player />, appTarget);
