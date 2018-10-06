@@ -26,6 +26,5 @@ const updateToolbox = function (toolboxXML) {
 
 export {
     reducer as default,
-    initialState as toolboxInitialState,
     updateToolbox
 };

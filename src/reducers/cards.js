@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import analytics from '../lib/analytics';
-
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
 import decks from '../lib/libraries/decks/index.jsx';
 
 const CLOSE_CARDS = 'scratch-gui/cards/CLOSE_CARDS';
@@ -19,13 +14,8 @@ const initialState = {
     content: decks,
     activeDeckId: null,
     step: 0,
-<<<<<<< HEAD
     x: 292,
     y: 365,
-=======
-    x: 0,
-    y: 0,
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
     dragging: false
 };
 
@@ -48,14 +38,6 @@ const reducer = function (state, action) {
         });
     case NEXT_STEP:
         if (state.activeDeckId !== null) {
-<<<<<<< HEAD
-=======
-            analytics.event({
-                category: 'how-to',
-                action: 'next step',
-                label: `${state.activeDeckId} - ${state.step}`
-            });
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
             return Object.assign({}, state, {
                 step: state.step + 1
             });
@@ -125,10 +107,6 @@ const endDrag = function () {
 
 export {
     reducer as default,
-<<<<<<< HEAD
-=======
-    initialState as cardsInitialState,
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
     activateDeck,
     viewCards,
     closeCards,

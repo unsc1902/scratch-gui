@@ -34,7 +34,6 @@ const setCallback = callback => ({type: SET_CALLBACK, callback: callback});
 
 export {
     reducer as default,
-    initialState as colorPickerInitialState,
     activateColorPicker,
     deactivateColorPicker,
     setCallback

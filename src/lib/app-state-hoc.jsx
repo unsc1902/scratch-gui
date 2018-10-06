@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {createStore, combineReducers, compose} from 'redux';
-import ConnectedIntlProvider from './connected-intl-provider.jsx';
+import {createStore, applyMiddleware, compose} from 'redux';
+import throttle from 'redux-throttle';
 
 import {intlShape} from 'react-intl';
 import {IntlProvider, updateIntl} from 'react-intl-redux';
@@ -22,9 +22,6 @@ const enhancer = composeEnhancers(
  * Higher Order Component to provide redux state. If an `intl` prop is provided
  * it will override the internal `intl` redux state
  * @param {React.Component} WrappedComponent - component to provide state for
- * @param {boolean} localesOnly - only provide the locale state, not everything
- *                      required by the GUI. Used to exclude excess state when
-                        only rendering modals, not the GUI.
  * @returns {React.Component} component with redux and intl state provided
  */
 const AppStateHOC = function (WrappedComponent) {

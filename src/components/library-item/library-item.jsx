@@ -106,10 +106,7 @@ class LibraryItem extends React.PureComponent {
 }
 
 LibraryItem.propTypes = {
-    description: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node
-    ]),
+    description: PropTypes.string,
     disabled: PropTypes.bool,
     featured: PropTypes.bool,
     iconURL: PropTypes.string.isRequired,

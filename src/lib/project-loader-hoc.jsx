@@ -19,17 +19,6 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 projectData: null,
                 fetchingProject: false
             };
-            storage.setProjectHost(props.projectHost);
-            storage.setAssetHost(props.assetHost);
-            storage.setTranslatorFunction(props.intl.formatMessage);
-            props.setProjectId(props.projectId);
-            if (
-                props.projectId !== '' &&
-                props.projectId !== null &&
-                typeof props.projectId !== 'undefined'
-            ) {
-                this.updateProject(props.projectId);
-            }
         }
         componentDidMount () {
             if (this.props.projectId || this.props.projectId === 0) {
@@ -84,11 +73,8 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         projectId: 0
     };
 
-    const mapStateToProps = () => ({});
-
-    const mapDispatchToProps = dispatch => ({
-        setProjectId: id => dispatch(setProjectId(id))
-    });
+    return ProjectLoaderComponent;
+};
 
 export {
     ProjectLoaderHOC as default

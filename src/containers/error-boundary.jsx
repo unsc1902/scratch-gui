@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import bowser from 'bowser';
+import platform from 'platform';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 import CrashMessageComponent from '../components/crash-message/crash-message.jsx';
 import log from '../lib/log.js';
@@ -69,11 +68,4 @@ ErrorBoundary.propTypes = {
     children: PropTypes.node
 };
 
-const mapStateToProps = state => ({
-    isRtl: state.locales.isRtl
-});
-
-// no-op function to prevent dispatch prop being passed to component
-const mapDispatchToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);
+export default ErrorBoundary;

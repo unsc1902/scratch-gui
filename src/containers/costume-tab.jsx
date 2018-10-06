@@ -22,25 +22,17 @@ import {
     openBackdropLibrary
 } from '../reducers/modals';
 
-import {
-    activateTab,
-    SOUNDS_TAB_INDEX
-} from '../reducers/editor-tab';
-
-import {setRestore} from '../reducers/restore-deletion';
-
 import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg';
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
 import paintIcon from '../components/action-menu/icon--paint.svg';
 import cameraIcon from '../components/action-menu/icon--camera.svg';
 import surpriseIcon from '../components/action-menu/icon--surprise.svg';
-import searchIcon from '../components/action-menu/icon--search.svg';
 
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 
-let messages = defineMessages({
+const messages = defineMessages({
     addLibraryBackdropMsg: {
         defaultMessage: '选择背景',
         description: 'Button to add a backdrop in the editor tab',
@@ -77,8 +69,6 @@ let messages = defineMessages({
         id: 'gui.costumeTab.addCameraCostume'
     }
 });
-
-messages = {...messages, ...sharedMessages};
 
 class CostumeTab extends React.Component {
     constructor (props) {
@@ -141,11 +131,7 @@ class CostumeTab extends React.Component {
         this.setState({selectedCostumeIndex: costumeIndex});
     }
     handleDeleteCostume (costumeIndex) {
-        const restoreCostumeFun = this.props.vm.deleteCostume(costumeIndex);
-        this.props.dispatchUpdateRestore({
-            restoreFun: restoreCostumeFun,
-            deletedItem: 'Costume'
-        });
+        this.props.vm.deleteCostume(costumeIndex);
     }
     handleDuplicateCostume (costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex);
@@ -171,10 +157,6 @@ class CostumeTab extends React.Component {
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
-        const split = item.md5.split('.');
-        const type = split.length > 1 ? split[1] : null;
-        const rotationCenterX = type === 'svg' ? item.info[0] : item.info[0] / 2;
-        const rotationCenterY = type === 'svg' ? item.info[1] : item.info[1] / 2;
         const vmCostume = {
             name: item.name,
             md5: item.md5,
@@ -223,7 +205,6 @@ class CostumeTab extends React.Component {
     }
     render () {
         const {
-            dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             intl,
             onNewCostumeFromCameraClick,
             onNewLibraryBackdropClick,
@@ -242,7 +223,7 @@ class CostumeTab extends React.Component {
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 
-        if (!vm.editingTarget) {
+        if (!target) {
             return null;
         }
 
@@ -288,11 +269,6 @@ class CostumeTab extends React.Component {
                         title: intl.formatMessage(messages.addBlankCostumeMsg),
                         img: paintIcon,
                         onClick: this.handleNewBlankCostume
-                    },
-                    {
-                        title: intl.formatMessage(addLibraryMessage),
-                        img: searchIcon,
-                        onClick: addLibraryFunc
                     }
                 ]}
                 items={costumeData}
@@ -370,7 +346,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onNewLibraryBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());

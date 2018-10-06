@@ -87,7 +87,7 @@ const PlaybackStep = props => (
         </Box>
         <Box className={styles.buttonRow}>
             <button
-                className={styles.rerecordButton}
+                className={styles.cancelButton}
                 onClick={props.onBack}
             >
                 <img

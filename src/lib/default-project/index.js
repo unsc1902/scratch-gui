@@ -1,5 +1,5 @@
 import {TextEncoder} from 'text-encoding';
-import projectData from './project-data';
+import projectJson from './project.json';
 
 /* eslint-disable import/no-unresolved */
 import popWav from '!arraybuffer-loader!./83a9787d4cb6f3b7632b4ddfebf74367.wav';

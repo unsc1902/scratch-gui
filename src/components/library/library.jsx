@@ -9,52 +9,38 @@ import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
-import analytics from '../../lib/analytics';
 
 import styles from './library.css';
+
+const ALL_TAG_TITLE = 'All';
+const tagListPrefix = [{title: ALL_TAG_TITLE}];
 
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'gui.library.filterPlaceholder',
         defaultMessage: 'Search',
         description: 'Placeholder text for library search field'
-    },
-    allTag: {
-        id: 'gui.library.allTag',
-        defaultMessage: 'All',
-        description: 'Label for library tag to revert to all items after filtering by tag.'
     }
 });
-
-const ALL_TAG = {tag: 'all', intlLabel: messages.allTag};
-const tagListPrefix = [ALL_TAG];
 
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleBlur',
-            'handleClose',
             'handleFilterChange',
             'handleFilterClear',
             'handleFocus',
             'handleMouseEnter',
             'handleMouseLeave',
             'handleSelect',
-            'handleTagClick',
-            'setFilteredDataRef'
+            'handleTagClick'
         ]);
         this.state = {
             selectedItem: null,
             filterQuery: '',
-            selectedTag: ALL_TAG.tag
+            selectedTag: ALL_TAG_TITLE.toLowerCase()
         };
-    }
-    componentDidUpdate (prevProps, prevState) {
-        if (prevState.filterQuery !== this.state.filterQuery ||
-            prevState.selectedTag !== this.state.selectedTag) {
-            this.scrollToTop();
-        }
     }
     handleBlur (id) {
         this.handleMouseLeave(id);
@@ -63,12 +49,8 @@ class LibraryComponent extends React.Component {
         this.handleMouseEnter(id);
     }
     handleSelect (id) {
-        this.handleClose();
-        this.props.onItemSelected(this.getFilteredData()[id]);
-    }
-    handleClose () {
         this.props.onRequestClose();
-        analytics.pageview(`/${this.props.id}/search?q=${this.state.filterQuery}`);
+        this.props.onItemSelected(this.getFilteredData()[id]);
     }
     handleTagClick (tag) {
         this.setState({
@@ -85,7 +67,7 @@ class LibraryComponent extends React.Component {
     handleFilterChange (event) {
         this.setState({
             filterQuery: event.target.value,
-            selectedTag: ALL_TAG.tag
+            selectedTag: ALL_TAG_TITLE.toLowerCase()
         });
     }
     handleFilterClear () {
@@ -110,19 +92,13 @@ class LibraryComponent extends React.Component {
                 .indexOf(this.state.selectedTag) !== -1
         ));
     }
-    scrollToTop () {
-        this.filteredDataRef.scrollTop = 0;
-    }
-    setFilteredDataRef (ref) {
-        this.filteredDataRef = ref;
-    }
     render () {
         return (
             <Modal
                 fullScreen
                 contentLabel={this.props.title}
                 id={this.props.id}
-                onRequestClose={this.handleClose}
+                onRequestClose={this.props.onRequestClose}
             >
                 {(this.props.filterable || this.props.tags) && (
                     <div className={styles.filterBar}>
@@ -146,7 +122,7 @@ class LibraryComponent extends React.Component {
                             <div className={styles.tagWrapper}>
                                 {tagListPrefix.concat(this.props.tags).map((tagProps, id) => (
                                     <TagButton
-                                        active={this.state.selectedTag === tagProps.tag.toLowerCase()}
+                                        active={this.state.selectedTag === tagProps.title.toLowerCase()}
                                         className={classNames(
                                             styles.filterBarItem,
                                             styles.tagButton,
@@ -165,7 +141,6 @@ class LibraryComponent extends React.Component {
                     className={classNames(styles.libraryScrollGrid, {
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
                     })}
-                    ref={this.setFilteredDataRef}
                 >
                     {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?

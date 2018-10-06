@@ -34,6 +34,9 @@ class AudioEffects {
             playbackRate = 1 / pitchRatio;
             sampleCount = Math.floor(buffer.length / playbackRate);
             break;
+        case effectTypes.REVERSE:
+            buffer.getChannelData(0).reverse();
+            break;
         }
         if (window.OfflineAudioContext) {
             this.audioContext = new window.OfflineAudioContext(1, sampleCount, buffer.sampleRate);
@@ -43,24 +46,7 @@ class AudioEffects {
             const sampleScale = 44100 / buffer.sampleRate;
             this.audioContext = new window.webkitOfflineAudioContext(1, sampleScale * sampleCount, 44100);
         }
-
-        // For the reverse effect we need to manually reverse the data into a new audio buffer
-        // to prevent overwriting the original, so that the undo stack works correctly.
-        // Doing buffer.reverse() would mutate the original data.
-        if (name === effectTypes.REVERSE) {
-            const originalBufferData = buffer.getChannelData(0);
-            const newBuffer = this.audioContext.createBuffer(1, buffer.length, buffer.sampleRate);
-            const newBufferData = newBuffer.getChannelData(0);
-            const bufferLength = buffer.length;
-            for (let i = 0; i < bufferLength; i++) {
-                newBufferData[i] = originalBufferData[bufferLength - i - 1];
-            }
-            this.buffer = newBuffer;
-        } else {
-            // All other effects use the original buffer because it is not modified.
-            this.buffer = buffer;
-        }
-
+        this.buffer = buffer;
         this.source = this.audioContext.createBufferSource();
         this.source.buffer = this.buffer;
         this.source.playbackRate.value = playbackRate;

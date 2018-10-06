@@ -1,7 +1,6 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 @import "../../css/typography.css";
-@import "../../css/z-index.css";
 
 .modal-overlay {
     position: fixed;
@@ -9,7 +8,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: $z-index-modal;
+    z-index: 1000;
     background-color: $ui-modal-overlay;
 }
 
@@ -45,7 +44,7 @@ $sides: 20rem;
 
     box-sizing: border-box;
     width: 100%;
-    background-color: $extensions-primary;
+    background-color: $pen-primary;
 }
 
 .header-item {
@@ -80,10 +79,6 @@ $sides: 20rem;
     display: flex;
     flex-basis: $sides;
     justify-content: flex-start;
-}
-
-[dir="rtl"] .header-item-close img {
-    transform: scaleX(-1);
 }
 
 .body {
@@ -133,12 +128,12 @@ $sides: 20rem;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
-    border: 0px solid $extensions-primary;
+    border: 0px solid $pen-primary;
     outline: none;
 }
 
 .input-row button.ok-button {
-    background: $extensions-primary;
+    background: $import-primary;
     color: white;
 }
 

@@ -1,6 +1,5 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
-@import "../../css/z-index.css";
 
 .page-wrapper {
     height: 100%;
@@ -8,7 +7,7 @@
 
 .body-wrapper {
     height: calc(100% - $menu-bar-height);
-    background-color: $ui-primary;
+    background-color: $ui-warpper;
 }
 
 .body-wrapper * {
@@ -63,6 +62,7 @@
     flex-grow: 1;
     height: 80%;
     margin-bottom: 0;
+    margin-left: -0.5rem;
 
     border-radius: 1rem 1rem 0 0;
     border: 1px solid $ui-black-transparent;
@@ -78,27 +78,11 @@
     align-items: center;
 
     user-select: none;
-    white-space: nowrap;
-}
-
-[dir="ltr"] .tab {
-    margin-left: -0.5rem;
-}
-
-[dir="rtl"] .tab {
-    margin-right: -0.5rem;
-}
-
-[dir="ltr"] .tab:nth-of-type(1) {
-    margin-left: 0;
-}
-
-[dir="rtl"] .tab:nth-of-type(1) {
-    margin-right: 0;
 }
 
 /* Use z-indices to force left-on-top for tabs */
 .tab:nth-of-type(1) {
+    margin-left: 0;
     z-index: 3;
 }
 .tab:nth-of-type(2) {
@@ -120,25 +104,9 @@
 }
 
 .tab img {
+    margin-right: 0.125rem;
     width: 1.375rem;
     filter: grayscale(100%);
-}
-
-[dir="ltr"] .tab img {
-    margin-right: 0.125rem;
-}
-
-[dir="rtl"] .tab img {
-    margin-left: 0.125rem;
-}
-
-/* mirror blocks and sound tab icons */
-[dir="rtl"] .tab:nth-of-type(1) img {
-    transform: scaleX(-1);
-}
-
-[dir="rtl"] .tab:nth-of-type(3) img {
-    transform: scaleX(-1);
 }
 
 .tab.is-selected img {
@@ -164,6 +132,7 @@
 .tabs {
     position: relative;
     flex-grow: 1;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
@@ -171,6 +140,7 @@
 .tab-panel {
     position: relative;
     flex-grow: 1;
+    flex-shrink: 0;
     display: none;
 }
 
@@ -194,24 +164,9 @@
     */
     display: flex;
     flex-direction: column;
-    /* pad entire wrapper to the left and right; allow children to fill width */
-    padding-left: $space;
-    padding-right: $space;
-}
 
-.stage-and-target-wrapper.large {
-    /* Fix the max width to max large stage size (defined in layout_constants.js) + gutter size */
+    /* Fix the max width to max stage size (defined in layout_constants.js) + gutter size */
     max-width: calc(480px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.large-constrained {
-    /* Fix the max width to max largeConstrained stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(408px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.small {
-    /* Fix the max width to max small stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(240px + calc($space * 2));
 }
 
 .target-wrapper {
@@ -220,7 +175,8 @@
     flex-basis: 0;
 
     padding-top: $space;
-    min-height: 0; /* this makes it work in Firefox */
+    padding-left: $space;
+    padding-right: $space;
 
     /*
         For making the sprite-selector a scrollable pane
@@ -231,13 +187,12 @@
 }
 
 .extension-button-container {
-    width: 3.75rem;
+    width: 3.25rem;
     height: 3.25rem;
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
-    z-index: $z-index-extension-button;
+    z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
     background: $motion-primary;
 
     border: 1px solid $motion-primary;
@@ -271,22 +226,6 @@ $fade-out-distance: 15px;
     height: 1.75rem;
 }
 
-[dir="rtl"] .extension-button-icon {
-    transform: scaleX(-1);
-}
-
 .extension-button > div {
     margin-top: 0;
-}
-
-/* Alerts */
-
-.alerts-container {
-    width: 448px;
-    z-index: $z-index-alerts;
-    left: 0;
-    right: 0;
-    margin: auto;
-    position: absolute;
-    margin-top: 53px;
 }

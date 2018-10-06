@@ -11,15 +11,8 @@
 }
 
 .icon {
-    height: 1.5rem;
-}
-
-[dir="ltr"] .icon {
     margin-right: .5rem;
-}
-
-[dir="rtl"] .icon {
-    margin-left: .5rem;
+    height: 1.5rem;
 }
 
 .content {

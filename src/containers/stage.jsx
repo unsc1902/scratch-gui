@@ -5,7 +5,6 @@ import Renderer from 'scratch-render';
 import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
-import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
 import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
@@ -52,17 +51,6 @@ class Stage extends React.Component {
             colorInfo: null,
             question: null
         };
-        if (this.props.vm.renderer) {
-            this.renderer = this.props.vm.renderer;
-            this.canvas = this.renderer.canvas;
-        } else {
-            this.canvas = document.createElement('canvas');
-            this.renderer = new Renderer(this.canvas);
-            this.props.vm.attachRenderer(this.renderer);
-        }
-        this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
-        this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
-        this.props.vm.setVideoProvider(new VideoProvider());
     }
     componentDidMount () {
         this.attachRectEvents();
@@ -75,12 +63,12 @@ class Stage extends React.Component {
         this.props.vm.setVideoProvider(new VideoProvider());
     }
     shouldComponentUpdate (nextProps, nextState) {
-        return this.props.stageSize !== nextProps.stageSize ||
+        return this.props.width !== nextProps.width ||
+            this.props.height !== nextProps.height ||
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
-            this.state.question !== nextState.question ||
-            this.props.micIndicator !== nextProps.micIndicator;
+            this.state.question !== nextState.question;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -365,8 +353,8 @@ class Stage extends React.Component {
             commonStopDragActions();
         }
     }
-    setDragCanvas (canvas) {
-        this.dragCanvas = canvas;
+    setCanvas (canvas) {
+        this.canvas = canvas;
     }
     setDragCanvas (canvas) {
         this.dragCanvas = canvas;
@@ -379,7 +367,7 @@ class Stage extends React.Component {
         } = this.props;
         return (
             <StageComponent
-                canvas={this.canvas}
+                canvasRef={this.setCanvas}
                 colorInfo={this.state.colorInfo}
                 dragRef={this.setDragCanvas}
                 question={this.state.question}
@@ -392,6 +380,7 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
+    height: PropTypes.number,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     onActivateColorPicker: PropTypes.func,

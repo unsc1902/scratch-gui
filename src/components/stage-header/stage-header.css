@@ -1,6 +1,5 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
-@import "../../css/z-index.css";
 
 .stage-header-wrapper {
     position: relative;
@@ -12,7 +11,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: $z-index-stage-header;
+    z-index: 5000;
 }
 
 .stage-menu-wrapper {
@@ -22,8 +21,7 @@
     flex-shrink: 0;
     align-items: center;
     height: $stage-menu-height;
-    padding-top: $space;
-    padding-bottom: $space;
+    padding: $space;
 }
 
 .stage-size-row {
@@ -32,14 +30,7 @@
 
 .stage-size-toggle-group {
     display: flex;
-}
-
-[dir="ltr"] .stage-size-toggle-group {
     margin-right: .2rem;
-}
-
-[dir="rtl"] .stage-size-toggle-group {
-    margin-left: .2rem;
 }
 
 .stage-button {
@@ -59,32 +50,19 @@
     height: 100%;
 }
 
-[dir="rtl"] .stage-button-icon {
-    transform: scaleX(-1);
-}
-
-[dir="ltr"] .stage-button-first {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-[dir="ltr"] .stage-button-last {
+.stage-button-right {
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-[dir="rtl"] .stage-button-first {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-[dir="rtl"] .stage-button-last {
-    border-right: none;
+.stage-button-left {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.stage-button-toggled-off {
-    filter: saturate(0);
+.stage-button-disabled {
+    opacity: .5;
+    cursor: auto;
+    background: transparent;
 }

@@ -117,13 +117,15 @@
         "sampleCount": 25792,
         "rate": 22050,
         "format": "",
-    },
         "tags": []
-        "tags": [
-            "music",
-            "instruments",
-            "notes"
-        ]
+    },
+    {
+        "name": "B Elec Bass",
+        "md5": "5a0701d0a914223b5288300ac94e90e4.wav",
+        "sampleCount": 6208,
+        "rate": 22050,
+        "format": "",
+        "tags": []
     },
     {
         "name": "B Elec Guitar",
@@ -843,15 +845,7 @@
         "sampleCount": 343746,
         "rate": 22050,
         "format": "adpcm",
-<<<<<<< HEAD
         "tags": []
-=======
-        "tags": [
-            "music",
-            "electronic",
-            "loops"
-        ]
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
     },
     {
         "name": "Dance Celebrate",
@@ -1334,7 +1328,7 @@
         "tags": []
     },
     {
-        "name": "Footsteps",
+        "name": "Footsteps-1",
         "md5": "c893b0a9b3e2e0594f1f921a12aa66be.wav",
         "sampleCount": 58880,
         "rate": 11025,
@@ -1675,16 +1669,7 @@
         "sampleCount": 291214,
         "rate": 22050,
         "format": "adpcm",
-<<<<<<< HEAD
         "tags": []
-=======
-        "tags": [
-            "animals",
-            "background",
-            "crickets",
-            "ambience"
-        ]
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
     },
     {
         "name": "Kick Back",
@@ -1692,15 +1677,7 @@
         "sampleCount": 44748,
         "rate": 22050,
         "format": "adpcm",
-<<<<<<< HEAD
         "tags": []
-=======
-        "tags": [
-            "music",
-            "loops",
-            "hiphop"
-        ]
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
     },
     {
         "name": "Kick Drum",
@@ -2573,6 +2550,15 @@
         "rate": 22050,
         "format": "adpcm",
         "tags": []
+    },
+    {
+        "name": "Trumpet1",
+        "md5": "851c9e2c38e5e71922231a8f64c37e70.wav",
+        "sampleCount": 25800,
+        "rate": 11025,
+        "format": "",
+        "tags": []
+    },
     {
         "name": "Trumpet2",
         "md5": "dd73f891deca0241b800ed203408b6f3.wav",

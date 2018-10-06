@@ -3,34 +3,29 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
-import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import Question from '../../containers/question.jsx';
-import MicIndicator from '../mic-indicator/mic-indicator.jsx';
-import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
-import {getStageDimensions} from '../../lib/screen-utils.js';
+import {getStageSize} from '../../lib/screen-utils.js';
 import styles from './stage.css';
 
 const StageComponent = props => {
     const {
-        canvas,
+        canvasRef,
         dragRef,
+        height,
         isColorPicking,
         isFullScreen,
+        width,
         colorInfo,
-        micIndicator,
-        question,
-        stageSize,
-        useEditorDragStyle,
         onDeactivateColorPicker,
-        onDoubleClick,
+        question,
         onQuestionAnswered,
         useEditorDragStyle,
         ...boxProps
     } = props;
 
-    const stageDimensions = getStageDimensions(stageSize, isFullScreen);
+    const stageSize = getStageSize(isFullScreen, height, width);
 
     return (
         <div>
@@ -40,28 +35,22 @@ const StageComponent = props => {
                     [styles.stageWrapperOverlay]: isFullScreen,
                     [styles.withColorPicker]: !isFullScreen && isColorPicking
                 })}
-                style={{
-                    minHeight: stageDimensions.height,
-                    minWidth: stageDimensions.width
-                }}
-                onDoubleClick={onDoubleClick}
             >
-                <DOMElementRenderer
+                <Box
                     className={classNames(
                         styles.stage,
                         {[styles.stageOverlayContent]: isFullScreen}
                     )}
-                    domElement={canvas}
-                    style={{
-                        height: stageDimensions.height,
-                        width: stageDimensions.width
-                    }}
+                    componentRef={canvasRef}
+                    element="canvas"
+                    height={stageSize.height}
+                    width={stageSize.width}
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
                     <MonitorList
                         draggable={useEditorDragStyle}
-                        stageSize={stageDimensions}
+                        stageSize={stageSize}
                     />
                 </Box>
                 {isColorPicking && colorInfo ? (
@@ -69,33 +58,24 @@ const StageComponent = props => {
                         <Loupe colorInfo={colorInfo} />
                     </Box>
                 ) : null}
-                <div
-                    className={styles.stageBottomWrapper}
-                    style={{
-                        width: stageDimensions.width,
-                        height: stageDimensions.height,
-                        left: '50%',
-                        marginLeft: stageDimensions.width * -0.5
-                    }}
-                >
-                    {micIndicator ? (
-                        <MicIndicator
-                            className={styles.micIndicator}
-                            stageSize={stageDimensions}
-                        />
-                    ) : null}
-                    {question === null ? null : (
+                {question === null ? null : (
+                    <div
+                        className={classNames(
+                            styles.stageOverlayContent,
+                            styles.stageOverlayContentBorderOverride
+                        )}
+                    >
                         <div
                             className={styles.questionWrapper}
-                            style={{width: stageDimensions.width}}
+                            style={{width: stageSize.width}}
                         >
                             <Question
                                 question={question}
                                 onQuestionAnswered={onQuestionAnswered}
                             />
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
                 <canvas
                     className={styles.draggingSprite}
                     height={0}
@@ -113,19 +93,22 @@ const StageComponent = props => {
     );
 };
 StageComponent.propTypes = {
-    canvas: PropTypes.instanceOf(Element).isRequired,
+    canvasRef: PropTypes.func,
     colorInfo: Loupe.propTypes.colorInfo,
     dragRef: PropTypes.func,
+    height: PropTypes.number,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     onDeactivateColorPicker: PropTypes.func,
-    onDoubleClick: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
-    useEditorDragStyle: PropTypes.bool
+    useEditorDragStyle: PropTypes.bool,
+    width: PropTypes.number
 };
 StageComponent.defaultProps = {
-    dragRef: () => {}
+    canvasRef: () => {},
+    dragRef: () => {},
+    width: 480,
+    height: 360
 };
 export default StageComponent;

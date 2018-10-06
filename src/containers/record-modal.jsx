@@ -139,7 +139,7 @@ RecordModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    vm: state.scratchGui.vm
+    vm: state.vm
 });
 
 const mapDispatchToProps = dispatch => ({

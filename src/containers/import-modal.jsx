@@ -73,7 +73,6 @@ class ImportModal extends React.Component {
                 errorMessage={this.state.errorMessage}
                 hasValidationError={this.state.hasValidationError}
                 inputValue={this.state.inputValue}
-                isRtl={this.props.isRtl}
                 placeholder="scratch.mit.edu/projects/123456789"
                 onCancel={this.handleCancel}
                 onChange={this.handleChange}
@@ -86,15 +85,12 @@ class ImportModal extends React.Component {
 }
 
 ImportModal.propTypes = {
-    isRtl: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onViewProject: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-    isRtl: state.locales.isRtl
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
     onBack: () => {

@@ -24,6 +24,5 @@ const updateBlockDrag = function (areBlocksOverGui) {
 
 export {
     reducer as default,
-    initialState as blockDragInitialState,
     updateBlockDrag
 };

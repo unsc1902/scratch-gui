@@ -2,19 +2,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './question.css';
 import Input from '../forms/input.jsx';
-import enterIcon from './icon--enter.svg';
 
 const QuestionComponent = props => {
     const {
         answer,
-        className,
         question,
         onChange,
         onClick,
         onKeyPress
     } = props;
     return (
-        <div className={className}>
+        <div className={styles.questionWrapper}>
             <div className={styles.questionContainer}>
                 {question ? (
                     <div className={styles.questionLabel}>{question}</div>
@@ -30,11 +28,7 @@ const QuestionComponent = props => {
                         className={styles.questionSubmitButton}
                         onClick={onClick}
                     >
-                        <img
-                            className={styles.questionSubmitButtonIcon}
-                            draggable={false}
-                            src={enterIcon}
-                        />
+                        {'✔︎' /* @todo should this be an image? */}
                     </button>
                 </div>
             </div>
@@ -44,7 +38,6 @@ const QuestionComponent = props => {
 
 QuestionComponent.propTypes = {
     answer: PropTypes.string,
-    className: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,

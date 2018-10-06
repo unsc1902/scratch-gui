@@ -5,13 +5,13 @@ import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-int
 
 import Box from '../box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
+import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import styles from './stage-selector.css';
 
 import backdropIcon from '../action-menu/icon--backdrop.svg';
 import fileUploadIcon from '../action-menu/icon--file-upload.svg';
 import paintIcon from '../action-menu/icon--paint.svg';
 import surpriseIcon from '../action-menu/icon--surprise.svg';
-import searchIcon from '../action-menu/icon--search.svg';
 
 const messages = defineMessages({
     addBackdropFromLibrary: {
@@ -42,14 +42,10 @@ const StageSelector = props => {
         fileInputRef,
         intl,
         selected,
-        raised,
-        receivedBlocks,
         url,
         onBackdropFileUploadClick,
         onBackdropFileUpload,
         onClick,
-        onMouseEnter,
-        onMouseLeave,
         onNewBackdropClick,
         onSurpriseBackdropClick,
         onEmptyBackdropClick,
@@ -58,14 +54,9 @@ const StageSelector = props => {
     return (
         <Box
             className={classNames(styles.stageSelector, {
-                [styles.isSelected]: selected,
-                [styles.raised]: raised || dragOver,
-                [styles.receivedBlocks]: receivedBlocks
+                [styles.isSelected]: selected
             })}
-            componentRef={containerRef}
             onClick={onClick}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
             {...componentProps}
         >
             <div className={styles.header}>
@@ -78,7 +69,7 @@ const StageSelector = props => {
                 </div>
             </div>
             {url ? (
-                <img
+                <CostumeCanvas
                     className={styles.costumeCanvas}
                     height={54}
                     url={url}
@@ -130,12 +121,8 @@ StageSelector.propTypes = {
     onBackdropFileUploadClick: PropTypes.func,
     onClick: PropTypes.func,
     onEmptyBackdropClick: PropTypes.func,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
     onNewBackdropClick: PropTypes.func,
     onSurpriseBackdropClick: PropTypes.func,
-    raised: PropTypes.bool.isRequired,
-    receivedBlocks: PropTypes.bool.isRequired,
     selected: PropTypes.bool.isRequired,
     url: PropTypes.string
 };

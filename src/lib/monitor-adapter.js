@@ -13,10 +13,8 @@ const isUndefined = a => typeof a === 'undefined';
  * @param {string|number|Array} block.value - The monitor value
  * @return {object} The adapted monitor with label and category
  */
-export default function ({id, spriteName, opcode, params, value, vm}) {
-    // Extension monitors get their labels from the Runtime through `getLabelForOpcode`.
-    // Other monitors' labels are hard-coded in `OpcodeLabels`.
-    let {label, category, labelFn} = (vm && vm.runtime.getLabelForOpcode(opcode)) || OpcodeLabels(opcode);
+export default function ({id, spriteName, opcode, params, value}) {
+    let {label, category, labelFn} = OpcodeLabels(opcode);
 
     // Use labelFn if provided for dynamic labelling (e.g. variables)
     if (!isUndefined(labelFn)) label = labelFn(params);
@@ -30,16 +28,6 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
     if (typeof value === 'number') {
         value = Number(value.toFixed(6));
     }
-
-    // Turn the value to a string, for handle boolean values
-    if (typeof value === 'boolean') {
-        value = value.toString();
-    }
-
-    // Lists can contain booleans, which should also be turned to strings
-    if (Array.isArray(value)) {
-        value = value.map(item => item.toString());
-    }
-
+    
     return {id, label, category, value};
 }

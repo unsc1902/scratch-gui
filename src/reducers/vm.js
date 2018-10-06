@@ -23,6 +23,5 @@ const setVM = function (vm) {
 };
 export {
     reducer as default,
-    initialState as vmInitialState,
     setVM
 };

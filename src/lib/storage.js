@@ -13,8 +13,7 @@ const ASSET_SERVER = 'https://cdn.assets.scratch.mit.edu';
 class Storage extends ScratchStorage {
     constructor () {
         super();
-        this.cacheDefaultProject();
-        this.addWebStore(
+        this.addWebSource(
             [this.AssetType.Project],
             projectAsset => {
                 const id = window.location.hash.substring(1);
@@ -25,47 +24,16 @@ class Storage extends ScratchStorage {
                 //     `${PROJECT_SERVER}/internalapi/project/${projectId}/get/`;
             }
         );
-        this.addWebStore(
+        this.addWebSource(
             [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
             // asset => `${ASSET_SERVER}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`
             asset => `/storage/${asset.assetId}.${asset.dataFormat}`
         );
-        this.addWebStore(
+        this.addWebSource(
             [this.AssetType.Sound],
             asset => `cdn.codingmarch.com/storage/${asset.assetId}.${asset.dataFormat}`
             // asset => `www.codingmarch.com/storage/${asset.assetId}.${asset.dataFormat}`
         );
-    }
-    setProjectHost (projectHost) {
-        this.projectHost = projectHost;
-    }
-    getProjectGetConfig (projectAsset) {
-        return `${this.projectHost}/internalapi/project/${projectAsset.assetId}/get/`;
-    }
-    getProjectCreateConfig () {
-        return {
-            url: `${this.projectHost}/`,
-            withCredentials: true
-        };
-    }
-    getProjectUpdateConfig (projectAsset) {
-        return {
-            url: `${this.projectHost}/${projectAsset.assetId}`,
-            withCredentials: true
-        };
-    }
-    setAssetHost (assetHost) {
-        this.assetHost = assetHost;
-    }
-    getAssetGetConfig (asset) {
-        return `${this.assetHost}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`;
-    }
-    setTranslatorFunction (translator) {
-        this.translator = translator;
-        this.cacheDefaultProject();
-    }
-    cacheDefaultProject () {
-        const defaultProjectAssets = defaultProject(this.translator);
         defaultProjectAssets.forEach(asset => this.cache(
             this.AssetType[asset.assetType],
             this.DataFormat[asset.dataFormat],

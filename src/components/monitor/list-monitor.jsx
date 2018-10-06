@@ -26,7 +26,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
         </div>
         <div className={styles.listFooter}>
             <div
-                className={classNames(draggable ? styles.addButton : null, 'no-drag')}
+                className={styles.addButton}
                 onClick={draggable ? onAdd : null}
             >
                 {'+' /* TODO waiting on asset */}
@@ -35,7 +35,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
                 {`length ${value.length}`}
             </div>
             <div
-                className={classNames(draggable ? styles.resizeHandle : null, 'no-drag')}
+                className={classNames(styles.resizeHandle, 'no-drag')}
                 onMouseDown={draggable ? onResizeMouseDown : null}
             >
                 {'=' /* TODO waiting on asset */}

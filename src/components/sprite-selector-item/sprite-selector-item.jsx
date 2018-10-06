@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 import styles from './sprite-selector-item.css';
 import {ContextMenuTrigger} from 'react-contextmenu';
@@ -19,11 +20,8 @@ const SpriteSelectorItem = props => (
             }),
             onClick: props.onClick,
             onMouseEnter: props.onMouseEnter,
-            onMouseLeave: props.onMouseLeave,
-            onMouseDown: props.onMouseDown,
-            onTouchStart: props.onMouseDown
+            onMouseLeave: props.onMouseLeave
         }}
-        disable={props.dragging}
         id={`${props.name}-${contextMenuId}`}
     >
         {(props.selected && props.onDeleteButtonClick) ? (
@@ -37,9 +35,11 @@ const SpriteSelectorItem = props => (
             <div className={styles.number}>{props.number}</div>
         )}
         {props.costumeURL ? (
-            <img
+            <CostumeCanvas
                 className={styles.spriteImage}
-                src={props.costumeURL}
+                height={32}
+                url={props.costumeURL}
+                width={32}
             />
         ) : null}
         <div className={styles.spriteInfo}>
@@ -48,7 +48,7 @@ const SpriteSelectorItem = props => (
                 <div className={styles.spriteDetails}>{props.details}</div>
             ) : null}
         </div>
-        {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (
+        {props.onDuplicateButtonClick || props.onDeleteButtonClick ? (
             <ContextMenu id={`${props.name}-${contextMenuId++}`}>
                 {props.onDuplicateButtonClick ? (
                     <MenuItem onClick={props.onDuplicateButtonClick}>
@@ -68,15 +68,6 @@ const SpriteSelectorItem = props => (
                         />
                     </MenuItem>
                 ) : null }
-                {props.onExportButtonClick ? (
-                    <MenuItem onClick={props.onExportButtonClick}>
-                        <FormattedMessage
-                            defaultMessage="export"
-                            description="Menu item to export the selected item"
-                            id="gui.spriteSelectorItem.contextMenuExport"
-                        />
-                    </MenuItem>
-                ) : null }
             </ContextMenu>
         ) : null}
     </ContextMenuTrigger>
@@ -86,14 +77,11 @@ SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
     costumeURL: PropTypes.string,
     details: PropTypes.string,
-    dragging: PropTypes.bool,
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
-    onExportButtonClick: PropTypes.func,
-    onMouseDown: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     selected: PropTypes.bool.isRequired

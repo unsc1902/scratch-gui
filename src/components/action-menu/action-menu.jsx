@@ -24,7 +24,6 @@ class ActionMenu extends React.Component {
             isOpen: false,
             forceHide: false
         };
-        this.mainTooltipId = `tooltip-${Math.random()}`;
     }
     componentDidMount () {
         // Touch start on the main button is caught to trigger open and not click
@@ -67,7 +66,6 @@ class ActionMenu extends React.Component {
     handleTouchOutside (e) {
         if (this.state.isOpen && !this.containerRef.contains(e.target)) {
             this.setState({isOpen: false});
-            ReactTooltip.hide();
         }
     }
     clickDelayer (fn) {
@@ -76,9 +74,8 @@ class ActionMenu extends React.Component {
         // for now all this work is to ensure the menu closes BEFORE the
         // (possibly slow) action is started.
         return event => {
-            ReactTooltip.hide();
-            if (fn) fn(event);
             this.setState({forceHide: true, isOpen: false}, () => {
+                if (fn) fn(event);
                 setTimeout(() => this.setState({forceHide: false}));
             });
         };
@@ -102,9 +99,10 @@ class ActionMenu extends React.Component {
             img: mainImg,
             title: mainTitle,
             moreButtons,
-            tooltipPlace,
             onClick
         } = this.props;
+
+        const mainTooltipId = `tooltip-${Math.random()}`;
 
         return (
             <div
@@ -119,7 +117,7 @@ class ActionMenu extends React.Component {
                 <button
                     aria-label={mainTitle}
                     className={classNames(styles.button, styles.mainButton)}
-                    data-for={this.mainTooltipId}
+                    data-for={mainTooltipId}
                     data-tip={mainTitle}
                     ref={this.setButtonRef}
                     onClick={this.clickDelayer(onClick)}
@@ -133,8 +131,8 @@ class ActionMenu extends React.Component {
                 <ReactTooltip
                     className={styles.tooltip}
                     effect="solid"
-                    id={this.mainTooltipId}
-                    place={tooltipPlace || 'left'}
+                    id={mainTooltipId}
+                    place="left"
                 />
                 <div className={styles.moreButtonsOuter}>
                     <div className={styles.moreButtons}>
@@ -142,11 +140,7 @@ class ActionMenu extends React.Component {
                             fileAccept, fileChange, fileInput}, keyId) => {
                             const isComingSoon = !handleClick;
                             const hasFileInput = fileInput;
-<<<<<<< HEAD
                             const tooltipId = title;
-=======
-                            const tooltipId = `${this.mainTooltipId}-${title}`;
->>>>>>> d5989d13881b5bd42336bd8a007bc9cec0489e6e
                             return (
                                 <div key={`${tooltipId}-${keyId}`}>
                                     <button
@@ -178,7 +172,7 @@ class ActionMenu extends React.Component {
                                         })}
                                         effect="solid"
                                         id={tooltipId}
-                                        place={tooltipPlace || 'left'}
+                                        place="left"
                                     />
                                 </div>
                             );
@@ -202,8 +196,7 @@ ActionMenu.propTypes = {
         fileInput: PropTypes.func // Optional, only for file upload
     })),
     onClick: PropTypes.func.isRequired,
-    title: PropTypes.node.isRequired,
-    tooltipPlace: PropTypes.string
+    title: PropTypes.node.isRequired
 };
 
 export default ActionMenu;
