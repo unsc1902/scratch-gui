@@ -383,6 +383,7 @@ Stage.propTypes = {
     height: PropTypes.number,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
+    micIndicator: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
     onDeactivateColorPicker: PropTypes.func,
     useEditorDragStyle: PropTypes.bool,

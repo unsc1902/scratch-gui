@@ -19,6 +19,11 @@ class PaintEditorWrapper extends React.Component {
     componentDidMount () {
         analytics.pageview('/editors/paint');
     }
+    shouldComponentUpdate (nextProps) {
+        return this.props.imageId !== nextProps.imageId ||
+            this.props.rtl !== nextProps.rtl ||
+            this.props.name !== nextProps.name;
+    }
     handleUpdateName (name) {
         this.props.vm.renameCostume(this.props.selectedCostumeIndex, name);
     }
@@ -40,6 +45,12 @@ class PaintEditorWrapper extends React.Component {
     }
     render () {
         if (!this.props.imageId) return null;
+        const {
+            selectedCostumeIndex,
+            vm,
+            ...componentProps
+        } = this.props;
+
         return (
             <PaintEditor
                 {...this.props}

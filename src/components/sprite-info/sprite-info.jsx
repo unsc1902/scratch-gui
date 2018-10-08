@@ -9,7 +9,9 @@ import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
 
-import layout from '../../lib/layout-constants.js';
+import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
+import {isWideLocale} from '../../lib/locale-utils.js';
+
 import styles from './sprite-info.css';
 
 import xIcon from './icon--x.svg';
@@ -186,6 +188,7 @@ class SpriteInfo extends React.Component {
                     <div className={classNames(styles.group, styles.largerInput)}>
                         <Label
                             secondary
+                            above={labelAbove}
                             text={sizeLabel}
                         >
                             <BufferedInput
